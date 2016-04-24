@@ -36,6 +36,7 @@ import com.Master5.main.utils.IPTools;
 import com.Master5.main.utils.ValidateTools;
 import com.Master5.main.utils.constant.Key;
 import com.Master5.main.utils.constant.MsgKey;
+import com.Master5.main.utils.encrypt.MD5;
 import com.Master5.main.utils.encrypt.encryptTools;
 import com.Master5.main.web.permission.entry.Permission;
 import com.Master5.main.web.permission.service.PermissionService;
@@ -75,14 +76,18 @@ public class Login {
 	@RequestMapping(value = "loging", method = RequestMethod.POST)
 	public String login(@ModelAttribute User loginUser, HttpServletRequest request,
 			RedirectAttributes redirectAttributes) {
+		
+		System.out.println(loginUser.getPass()+"==========");
 
 		List<String> msgList = new ArrayList<String>();
+		
+		loginUser.setPass( MD5.getMD5Pass( loginUser.getPass() ));
 
 		// subject理解成权限对象。类似user
 		Subject subject = SecurityUtils.getSubject();
 		Session session = subject.getSession();
 		// 创建用户名和密码的令牌
-		UsernamePasswordToken token = new UsernamePasswordToken(loginUser.getName(), loginUser.getPass());
+		UsernamePasswordToken token = new UsernamePasswordToken(loginUser.getName(), loginUser.getPass() );
 		// 记录该令牌，如果不记录则类似购物车功能不能使用。
 		token.setRememberMe(true);
 		subject.getPrincipal();
@@ -112,67 +117,6 @@ public class Login {
 
 	}
 
-	/**
-	 * 异步验证注册数据的正确性
-	 */
-	@RequestMapping(value = "checkRegAjax", method = RequestMethod.POST)
-	@ResponseBody
-	public Map<String, String> checkRegAjax(String nickName, String name, String pass, String pass2, String email,
-			String sex) {
-
-		return checkReg(nickName, name, pass, pass2, email, sex);
-	}
-
-	/**
-	 * 检查注册的各个字段的合法性
-	 */
-	private Map<String, String> checkReg(String nickName, String name, String pass, String pass2, String email,
-			String sex) {
-
-		Map<String, String> errMap = new HashMap<String, String>();
-
-		if (null == nickName || nickName.length() > 8 || nickName.length() < 2)
-			errMap.put("nickNameErr", "昵称长度必须2-10");
-		if (null == name || name.length() > 18 || name.length() < 5)
-			errMap.put("nameErr", "用户名的长度必须在6到18之间");
-		if (null == pass || pass.length() > 18 || pass.length() < 5)
-			errMap.put("passErr", "密码的长度必须在6到18之间");
-
-		if (!ValidateTools.userName(name))
-			errMap.put("nameErr", "用户名只能为英文和数字");
-		if (!ValidateTools.nickName(nickName))
-			errMap.put("nickNameErr", "昵称只能为英文数字和汉字");
-		if (!ValidateTools.password_reg(pass))
-			errMap.put("passErr", "密码只能为英文字母和数字");
-		if (null == email || !ValidateTools.Email(email))
-			errMap.put("emailErr", "邮箱格式不正确");
-
-		if (null != userService.findByNickName(nickName))
-			errMap.put("nickNameErr", "昵称已经存在");
-		if (null != userService.findByName(name))
-			errMap.put("nameErr", "用户名已经存在");
-		if (null != userService.findByEmail(email))
-			errMap.put("emailErr", "邮箱已经存在");
-
-		if (null == pass2 || !pass.equals(pass2))
-			errMap.put("pass2Err", "两次输入的密码不一样");
-
-		if (errMap.size() == 0) {
-			User user = userService.save(new User(nickName, name, pass, email, sex));
-
-			int year = Calendar.getInstance().get(Calendar.YEAR);
-			int month = Calendar.getInstance().get(Calendar.MONTH) + 1;
-			int day = Calendar.getInstance().get(Calendar.DATE);
-
-			// EmailTools.sendTxtMail( encryptTools.getEncodeStr( new int[ ] {
-			// (int) user.getId() ,
-			// year * 10000 + month * 100 + day } ) , email );
-			errMap.put("regForm", "可爱的<strong>" + nickName + "</strong>恭喜你注册成功。随后我们将验证爱卿的邮箱~");
-		}
-
-		return errMap;
-
-	}
 
 	@RequestMapping(value = "/checkEmail/{hash}", method = RequestMethod.GET)
 	public String checkEmail(@PathVariable String hash, RedirectAttributes attr) {
@@ -227,7 +171,7 @@ public class Login {
 		role.setState(Key.STATE_DEFAULT_ADMIN);
 		Set<Role> roles = new HashSet<Role>();
 		roles.add(roleService.save(role));
-		User user = new User(Key.ROLE_DEFAULT_ADMIN, Key.ADMIN_DEFAULT_NAME, Key.ADMIN_DEFAULT_PASS,
+		User user = new User(Key.ROLE_DEFAULT_ADMIN, Key.ADMIN_DEFAULT_NAME, MD5.getMD5Pass( Key.ADMIN_DEFAULT_PASS ),
 				Key.ADMIN_DEFAULT_EMAIL, Key.SEX_MAN);
 		user.setRoles(roles);
 		user.setState(Key.STATE_DEFAULT_ADMIN);

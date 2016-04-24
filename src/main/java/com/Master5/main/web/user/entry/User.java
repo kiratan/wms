@@ -23,25 +23,25 @@ import com.Master5.main.web.permission.entry.Permission;
 import com.Master5.main.web.role.entry.Role;
 
 @Entity
-@Table ( name = "user" , uniqueConstraints = { @UniqueConstraint ( columnNames = { "name" , "nickName" } ) } )
+@Table(name = "user", uniqueConstraints = { @UniqueConstraint(columnNames = { "name", "nickName" }) })
 public class User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue ( strategy = GenerationType.AUTO )
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
-	@Column ( unique = true )
-	private String nickName="没有名字";
+	@Column(unique = true)
+	private String nickName = "没有名字";
 
-	@Column ( unique = true )
+	@Column(unique = true)
 	private String name;
 
 	private String pass;
 
-//	@Column ( unique = true )
-	private String email="没有email";
+	// @Column ( unique = true )
+	private String email = "没有email";
 
 	private String sex;
 
@@ -49,11 +49,12 @@ public class User implements Serializable {
 
 	private String headImg;
 
-	@ManyToMany ( fetch = FetchType.EAGER )
-	@JoinTable ( name = "user_role" , joinColumns = { @JoinColumn ( name = "user_id" ) } , inverseJoinColumns = { @JoinColumn ( name = "role_id" ) } )
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "user_role", joinColumns = { @JoinColumn(name = "user_id") }, inverseJoinColumns = {
+			@JoinColumn(name = "role_id") })
 	private Set<Role> roles = new HashSet<Role>();
 
-	////////////////////透明字段
+	//////////////////// 透明字段
 
 	@Transient
 	private String ip;
@@ -61,113 +62,113 @@ public class User implements Serializable {
 	@Transient
 	private Set<Permission> permissions;
 
-	public long getId ( ) {
+	public long getId() {
 
 		return id;
 	}
 
-	public void setId (long id) {
+	public void setId(long id) {
 
 		this.id = id;
 	}
 
-	public String getName ( ) {
+	public String getName() {
 
 		return name;
 	}
 
-	public void setName (String name) {
+	public void setName(String name) {
 
 		this.name = name;
 	}
 
-	public String getPass ( ) {
+	public String getPass() {
 
 		return pass;
 	}
 
-	public void setPass (String pass) {
+	public void setPass(String pass) {
 
-		this.pass = MD5.getMD5Pass( pass );
+		this.pass = pass;
 	}
 
-	public String getEmail ( ) {
+	public String getEmail() {
 
 		return email;
 	}
 
-	public void setEmail (String email) {
+	public void setEmail(String email) {
 
 		this.email = email;
 	}
 
-	public String getSex ( ) {
+	public String getSex() {
 
 		return sex;
 	}
 
-	public void setSex (String sex) {
+	public void setSex(String sex) {
 
 		this.sex = sex;
 	}
 
-	public String getNickName ( ) {
+	public String getNickName() {
 
 		return nickName;
 	}
 
-	public void setNickName (String nickName) {
+	public void setNickName(String nickName) {
 
 		this.nickName = nickName;
 	}
 
-	public User ( ) {
+	public User() {
 
 		super();
 	}
 
-	public User (String nickName , String name , String pass , String email , String sex) {
+	public User(String nickName, String name, String pass, String email, String sex) {
 
 		super();
-		this.setNickName( nickName );
+		this.setNickName(nickName);
 		this.name = name;
-		this.pass = MD5.getMD5Pass( pass );
+		this.pass = pass;
 		this.email = email;
 		this.sex = sex;
 		this.state = 0;
 	}
 
-	public int getState ( ) {
+	public int getState() {
 
 		return this.state;
 	}
 
-	public void setState (int state) {
+	public void setState(int state) {
 
 		this.state = state;
 	}
 
-	public Set<Role> getRoles ( ) {
+	public Set<Role> getRoles() {
 
 		return roles;
 	}
 
-	public void setRoles (Set<Role> roles) {
+	public void setRoles(Set<Role> roles) {
 
 		this.roles = roles;
 	}
 
-	public String getIp ( ) {
+	public String getIp() {
 
 		return ip;
 	}
 
-	public void setIp (String ip) {
+	public void setIp(String ip) {
 
 		this.ip = ip;
 	}
 
-	public Set<Permission> getPermissions ( ) {
+	public Set<Permission> getPermissions() {
 
 		Set<Permission> pers = new HashSet<Permission>();
 
@@ -179,7 +180,7 @@ public class User implements Serializable {
 
 			for (Role role : getRoles()) {
 				for (Permission permission : role.getPermissions()) {
-					pers.add( permission );
+					pers.add(permission);
 				}
 			}
 
@@ -188,43 +189,48 @@ public class User implements Serializable {
 		return pers;
 	}
 
-	public void setPermissions (Set<Permission> permissions) {
+	public void setPermissions(Set<Permission> permissions) {
 
 		this.permissions = permissions;
 	}
 
 	@Override
-	public int hashCode ( ) {
+	public int hashCode() {
 
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + (int) ( id ^ ( id >>> 32 ) );
+		result = prime * result + (int) (id ^ (id >>> 32));
 		return result;
 	}
 
 	@Override
-	public boolean equals (Object obj) {
+	public boolean equals(Object obj) {
 
-		if (this == obj) return true;
-		if (obj == null) return false;
-		if (getClass() != obj.getClass()) return false;
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
 		User other = (User) obj;
-		if (id != other.id) return false;
+		if (id != other.id)
+			return false;
 		return true;
 	}
 
 	@Override
-	public String toString ( ) {
+	public String toString() {
 
-		return "User [id=" + id + ", nickName=" + nickName + ", name=" + name + ", pass=" + pass + ", email=" + email + ", sex=" + sex + ", state=" + state + "]";
+		return "User [id=" + id + ", nickName=" + nickName + ", name=" + name + ", pass=" + pass + ", email=" + email
+				+ ", sex=" + sex + ", state=" + state + "]";
 	}
 
-	public String getHeadImg ( ) {
+	public String getHeadImg() {
 
-		return null == headImg || headImg.equals( "" ) ? "defaultHead.png" : headImg;
+		return null == headImg || headImg.equals("") ? "defaultHead.png" : headImg;
 	}
 
-	public void setHeadImg (String headImg) {
+	public void setHeadImg(String headImg) {
 
 		this.headImg = headImg;
 	}

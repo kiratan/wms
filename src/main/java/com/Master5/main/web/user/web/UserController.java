@@ -82,7 +82,7 @@ public class UserController {
 			user.setRoles(roleSet);
 		}
 		user.setSex(sex);
-		user.setPass(pass);
+		user.setPass(MD5.getMD5Pass(pass));
 		user.setName(name);
 		user.setNickName(nickName);
 		if (null != userService.save(user)) {
@@ -253,7 +253,7 @@ public class UserController {
 			else if (null == pass || pass.length() > 18 || pass.length() < 6)
 				return "密码的长度必须在6到18之间";
 			else {
-				user.setPass(pass);
+				user.setPass(MD5.getMD5Pass(pass));
 			}
 		}
 		return "";

@@ -73,9 +73,6 @@ public class ShiroRealm extends AuthorizingRealm {
 		//给当前用户设置权限
 		info.addStringPermissions ( permissions ) ;
 
-		if ( user.getName ( ).equals ( "lsjspl" ) ) {
-
-		}
 		return info ;
 
 	}

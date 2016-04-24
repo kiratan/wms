@@ -3,10 +3,8 @@ package com.Master5.main.web.login;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,13 +25,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.Master5.main.annotation.annotationtools.GetValueFromAnnotation;
 import com.Master5.main.utils.GetClassByPackage;
 import com.Master5.main.utils.IPTools;
-import com.Master5.main.utils.ValidateTools;
 import com.Master5.main.utils.constant.Key;
 import com.Master5.main.utils.constant.MsgKey;
 import com.Master5.main.utils.encrypt.MD5;
@@ -77,8 +73,6 @@ public class Login {
 	public String login(@ModelAttribute User loginUser, HttpServletRequest request,
 			RedirectAttributes redirectAttributes) {
 		
-		System.out.println(loginUser.getPass()+"==========");
-
 		List<String> msgList = new ArrayList<String>();
 		
 		loginUser.setPass( MD5.getMD5Pass( loginUser.getPass() ));
@@ -100,6 +94,7 @@ public class Login {
 				loginUser.setIp(IPTools.getClientIp(request));
 				session.setAttribute(Key.LOGINED, loginUser);
 				redirectAttributes.addFlashAttribute(MsgKey.msg, msgList);
+				logger.info("登陆成功："+loginUser.getNickName());
 				return "redirect:/user/info";
 			}
 		} catch (UnknownAccountException ex) {
@@ -115,40 +110,6 @@ public class Login {
 		redirectAttributes.addFlashAttribute(MsgKey.msg, msgList);
 		return "redirect:/login/list";
 
-	}
-
-
-	@RequestMapping(value = "/checkEmail/{hash}", method = RequestMethod.GET)
-	public String checkEmail(@PathVariable String hash, RedirectAttributes attr) {
-
-		try {
-
-			int[] code = encryptTools.getDecodeStr(hash);
-
-			int time = Calendar.getInstance().get(Calendar.YEAR) * 1000
-					+ (Calendar.getInstance().get(Calendar.MONTH) + 1) * 100
-					+ Calendar.getInstance().get(Calendar.DATE);
-
-			if (time - code[1] > 3) {
-				attr.addFlashAttribute("msg", "验证邮箱已过期~请重新验证");
-			} else {
-
-				Role role = roleService.findById(2);
-
-				Set<Role> roles = new HashSet<Role>();
-				roles.add(role);
-
-				User user = userService.findById((long) code[0]);
-				user.setState(1);
-				userService.save(user);
-				user.setRoles(roles);
-
-				attr.addFlashAttribute("msg", "验证邮箱成功~已经为你开放部分有趣功能 请登录后使用");
-			}
-		} catch (Exception e) {
-			logger.info("error：邮件验证", e);
-		}
-		return "redirect:/menu/list";
 	}
 
 	@RequestMapping(value = "init")

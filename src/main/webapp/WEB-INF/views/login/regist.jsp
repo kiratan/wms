@@ -87,19 +87,17 @@
 				<input type="hidden"  required="required" class="form-control"   name="pass"  id="pass"  placeholder="密码">
 		</div>
 		</div>
-		<div class="form-group">
+<%-- 		<div class="form-group">
 			<div class="col-sm-offset-2 col-sm-10">
 				<div class="checkbox" onclick="">
 					<label> <input type="checkbox">记住我 ${msg}</label>
 				</div>
 			</div>
-		</div>
+		</div> --%>
 		<div class="form-group">
-			<div class="col-sm-offset-2 col-sm-10">
-				<button type="submit" class="btn btn-info" id="login">登录</button>
-				<button id="enter" class="btn btn-info"
-					data-toggle="modal" data-target="#myModal">注册</button>
-			</div>
+				<button type="submit" class="btn btn-info" id="login" style="padding-left: 50px;padding-right: 50px">登录</button>
+<!-- 				<button id="enter" class="btn btn-info"
+					data-toggle="modal" data-target="#myModal">注册</button> -->
 		</div>
 	</form>
 	</div>

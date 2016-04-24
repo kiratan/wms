@@ -108,12 +108,12 @@
 							<input type="text"  class="form-control" name="pass2" id="pass2"  placeholder="请输入你的密码">
 							</div>
 						</div>
-						<div class="form-group" id="emailErr">
+<!-- 						<div class="form-group" id="emailErr">
 							<div class="input-group" >
 							<span class="input-group-addon alert-info">邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱</span>
 							 <input type="email" class="form-control" name="email" id="email" placeholder="请输入你的邮箱">
 							 </div>
-						</div>
+						</div> -->
 						<div class="form-group">
 						<div class="input-group" >
 						<span class="input-group-addon alert-info">性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别</span>
@@ -124,9 +124,9 @@
 						  <label class="btn alert-danger">
 						    <input type="radio" name="sex" id="sex2" value="女"> &nbsp;&nbsp;&nbsp;&nbsp;女&nbsp;&nbsp;
 						  </label>
-						  <label class="btn alert-info">
+<!-- 						  <label class="btn alert-info">
 						    <input type="radio" name="sex" id="sex3" value="人妖">&nbsp;&nbsp;&nbsp;&nbsp;人妖&nbsp;&nbsp;
-						  </label>
+						  </label> -->
 						</div>
 						</div>
 							</div>

@@ -32,7 +32,7 @@
 						        <b class="caret"></b>&nbsp;&nbsp;&nbsp;&nbsp;</a>
 						        <ul class="dropdown-menu">
 								        <shiro:guest>
-								          <li class="small"><a href="#" data-toggle="modal" data-target="#myModal">注册</a></li>
+<!-- 								          <li class="small"><a href="#" data-toggle="modal" data-target="#myModal">注册</a></li> -->
 								          <li class="small"><a href="${ctx}/login/list" >登录</a></li>
 								        </shiro:guest>
 								         <shiro:authenticated>

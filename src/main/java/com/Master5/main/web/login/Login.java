@@ -210,7 +210,7 @@ public class Login {
 		} catch ( Exception e ) {
 			logger.info( "error：邮件验证" , e );
 		}
-		return "redirect:../menu/list";
+		return "redirect:/menu/list";
 	}
 
 	@RequestMapping ( value = "init" )
@@ -223,7 +223,7 @@ public class Login {
 		if (null != roleService.findByState( Key.STATE_DEFAULT_ADMIN )) {
 			msgList.add( Key.SYSTEM_INIT_FAILY );
 			redirectAttributes.addFlashAttribute( Key.msg , msgList );
-			return "redirect:../list";
+			return "redirect:/login/list";
 		}
 		Set<Class<?>> classes = GetClassByPackage.getInstance().getClasses( pack );
 		Set<Permission> permissions = GetValueFromAnnotation.getInstance().getPermissions( classes );

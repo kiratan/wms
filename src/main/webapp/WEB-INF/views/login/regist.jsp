@@ -51,12 +51,6 @@
 
 		});
 		
-		$("#login").click(function(){
-
-			$('#pass').val(hex_md5($('#passInput').val()));
-			
-		 });
-		
 	});
 </script>
 </head>

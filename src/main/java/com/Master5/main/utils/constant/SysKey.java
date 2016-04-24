@@ -6,7 +6,7 @@ import com.Master5.main.utils.encrypt.MD5;
 public interface SysKey {
 
 	/**
-	 * 负状态的角色有且只能有一个  权限的数量不做限制
+	 * 负状态的角色有且只能有一个 权限的数量不做限制
 	 */
 	public static final int STATE_DEFAULT_DARK = -20;
 
@@ -28,7 +28,7 @@ public interface SysKey {
 
 	public static final String ADMIN_DEFAULT_NAME = "admin";
 
-	public static final String ADMIN_DEFAULT_PASS = MD5.getMD5("admin");
+	public static final String ADMIN_DEFAULT_PASS = "admin";
 
 	public static final String ADMIN_DEFAULT_EMAIL = "admin@yuanayuan.com";
 

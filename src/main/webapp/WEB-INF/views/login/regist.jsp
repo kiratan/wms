@@ -7,35 +7,30 @@
 <title>登录</title>
 </head>
 <body>
-
-	<div class="col-md-offset-4 col-sm-3 wrapper text-center"  >
-
+<div class="col-md-offset-4 col-sm-3 wrapper text-center"  >
 	<img  class="img-circle" id="headImg" src="${ctx}/resources/img/defaultHead.png">
 	<br/><br/>
-	
 	<form class="form-horizontal" role="form"  action="${ctx}/login/loging" method="post">
-
-	
 		<div class="form-group" id="regForm">
 		<div class="input-group">
 			<span class="input-group-addon alert-info">
-			<span class="glyphicon  glyphicon-user"></span>
+				<span class="glyphicon  glyphicon-user"></span>
 			</span>
-				<input type="text" required="required" class="form-control"  name="name" id="name" placeholder="账号">
+			<input type="text" required="required" class="form-control"  name="name" id="name" placeholder="账号">
 		</div>
 		</div>
 		<div class="form-group">
 		<div class="input-group">
 			<span class="input-group-addon alert-info"> 
-			<span class="glyphicon glyphicon-lock"></span> 
+				<span class="glyphicon glyphicon-lock"></span> 
 			</span>
-				<input type="password"  required="required" class="form-control"   name="pass"  id="pass"  placeholder="密码">
+			<input type="password"  required="required" class="form-control"   name="pass"  id="pass"  placeholder="密码">
 		</div>
 		</div>
 		<div class="form-group">
-				<button type="submit" class="btn btn-info" id="login" style="padding-left: 50px;padding-right: 50px">登录</button>
+			<button type="submit" class="btn btn-info" id="login" style="padding-left: 50px;padding-right: 50px">登录</button>
 		</div>
 	</form>
-	</div>
+</div>
 </body>
 </html>

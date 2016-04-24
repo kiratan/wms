@@ -1,5 +1,5 @@
 
-package com.Master5.main.web.role.service ;
+package com.Master5.main.web.user.service ;
 
 import java.util.HashMap ;
 import java.util.List ;
@@ -9,8 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired ;
 import org.springframework.stereotype.Service ;
 
 import com.Master5.main.utils.constant.SysKey;
-import com.Master5.main.web.role.dao.RoleDao;
-import com.Master5.main.web.role.entry.Role;
+import com.Master5.main.web.user.dao.RoleDao;
+import com.Master5.main.web.user.entry.Role;
 
 @Service
 public class RoleService {

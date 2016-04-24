@@ -19,8 +19,6 @@ import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
 import com.Master5.main.utils.encrypt.MD5;
-import com.Master5.main.web.permission.entry.Permission;
-import com.Master5.main.web.role.entry.Role;
 
 @Entity
 @Table(name = "user", uniqueConstraints = { @UniqueConstraint(columnNames = { "name", "nickName" }) })

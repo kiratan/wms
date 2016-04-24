@@ -1,5 +1,5 @@
 
-package com.Master5.main.web.permission.service ;
+package com.Master5.main.web.user.service ;
 
 import java.util.ArrayList ;
 import java.util.Collection ;
@@ -10,8 +10,8 @@ import java.util.Map ;
 import org.springframework.beans.factory.annotation.Autowired ;
 import org.springframework.stereotype.Service ;
 
-import com.Master5.main.web.permission.dao.PermissionDao;
-import com.Master5.main.web.permission.entry.Permission;
+import com.Master5.main.web.user.dao.PermissionDao;
+import com.Master5.main.web.user.entry.Permission;
 
 @Service
 public class PermissionService {

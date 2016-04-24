@@ -27,9 +27,9 @@ import com.Master5.main.utils.constant.MsgKey;
 import com.Master5.main.utils.constant.MsgTips;
 import com.Master5.main.utils.constant.SysKey;
 import com.Master5.main.utils.encrypt.MD5;
-import com.Master5.main.web.role.entry.Role;
-import com.Master5.main.web.role.service.RoleService;
+import com.Master5.main.web.user.entry.Role;
 import com.Master5.main.web.user.entry.User;
+import com.Master5.main.web.user.service.RoleService;
 import com.Master5.main.web.user.service.UserService;
 
 @Controller

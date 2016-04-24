@@ -1,5 +1,5 @@
 
-package com.Master5.main.web.role.entry ;
+package com.Master5.main.web.user.entry ;
 
 import java.io.Serializable ;
 import java.util.HashSet ;
@@ -17,9 +17,6 @@ import javax.persistence.Table ;
 import javax.persistence.UniqueConstraint ;
 
 import org.hibernate.validator.constraints.NotBlank ;
-
-import com.Master5.main.web.permission.entry.Permission;
-import com.Master5.main.web.user.entry.User;
 
 /**
  * 权限验证准备使用注解

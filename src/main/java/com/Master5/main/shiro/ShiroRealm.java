@@ -22,9 +22,9 @@ import org.apache.shiro.subject.SimplePrincipalCollection ;
 import org.springframework.beans.factory.annotation.Autowired ;
 import org.springframework.beans.factory.annotation.Qualifier ;
 
-import com.Master5.main.web.permission.entry.Permission;
-import com.Master5.main.web.role.entry.Role;
 import com.Master5.main.web.user.dao.UserDao;
+import com.Master5.main.web.user.entry.Permission;
+import com.Master5.main.web.user.entry.Role;
 import com.Master5.main.web.user.entry.User;
 import com.Master5.main.web.user.service.UserService;
 

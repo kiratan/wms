@@ -1,5 +1,5 @@
 
-package com.Master5.main.web.role.web ;
+package com.Master5.main.web.user.web ;
 
 import java.util.ArrayList ;
 import java.util.HashSet ;
@@ -26,10 +26,10 @@ import com.Master5.main.utils.constant.Key;
 import com.Master5.main.utils.constant.MsgKey;
 import com.Master5.main.utils.constant.MsgTips;
 import com.Master5.main.utils.constant.SysKey;
-import com.Master5.main.web.permission.entry.Permission;
-import com.Master5.main.web.permission.service.PermissionService;
-import com.Master5.main.web.role.entry.Role;
-import com.Master5.main.web.role.service.RoleService;
+import com.Master5.main.web.user.entry.Permission;
+import com.Master5.main.web.user.entry.Role;
+import com.Master5.main.web.user.service.PermissionService;
+import com.Master5.main.web.user.service.RoleService;
 
 @Controller
 @RequestMapping ( value = "role" )

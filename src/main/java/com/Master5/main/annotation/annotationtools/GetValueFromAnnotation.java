@@ -6,7 +6,7 @@ import java.util.HashSet ;
 import java.util.Set ;
 
 import com.Master5.main.annotation.CheckPermission;
-import com.Master5.main.web.permission.entry.Permission;
+import com.Master5.main.web.user.entry.Permission;
 
 public class GetValueFromAnnotation {
 

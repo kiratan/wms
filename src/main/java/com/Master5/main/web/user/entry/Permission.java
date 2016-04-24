@@ -1,5 +1,5 @@
 
-package com.Master5.main.web.permission.entry ;
+package com.Master5.main.web.user.entry ;
 
 import java.io.Serializable ;
 

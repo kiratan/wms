@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod ;
 import com.Master5.main.annotation.CheckPermission;
 import com.Master5.main.utils.constant.Key;
 import com.Master5.main.utils.constant.SysKey;
-import com.Master5.main.web.permission.service.PermissionService;
-import com.Master5.main.web.role.service.RoleService;
+import com.Master5.main.web.user.service.PermissionService;
+import com.Master5.main.web.user.service.RoleService;
 import com.Master5.main.web.user.service.UserService;
 
 @Controller

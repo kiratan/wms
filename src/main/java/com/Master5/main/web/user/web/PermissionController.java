@@ -1,5 +1,5 @@
 
-package com.Master5.main.web.permission.web ;
+package com.Master5.main.web.user.web ;
 
 import java.util.ArrayList ;
 import java.util.List ;
@@ -25,11 +25,11 @@ import com.Master5.main.utils.constant.Key;
 import com.Master5.main.utils.constant.MsgKey;
 import com.Master5.main.utils.constant.MsgTips;
 import com.Master5.main.utils.constant.SysKey;
-import com.Master5.main.web.permission.entry.Permission;
-import com.Master5.main.web.permission.service.PermissionService;
 import com.Master5.main.web.play.QrcodeController;
-import com.Master5.main.web.role.entry.Role;
+import com.Master5.main.web.user.entry.Permission;
+import com.Master5.main.web.user.entry.Role;
 import com.Master5.main.web.user.entry.User;
+import com.Master5.main.web.user.service.PermissionService;
 
 @Controller
 @RequestMapping ( value = "permission" )

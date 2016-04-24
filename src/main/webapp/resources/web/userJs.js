@@ -10,8 +10,6 @@ $(".update").click(
 
 			$(":input#nickName").val(nickName);
 			$(":input#name").val(name);
-			//$(".idForUpdate").remove();
-			//$("#addForm").append( "<input class='idForUpdate' type='hidden' name='id' value='" + id + "'>");
 			$(".idForUpdate").val(id);
 			$("#addForm").attr("action","../user/modify");
 			$("#enter").removeClass( "disabled");
@@ -28,8 +26,6 @@ $("#add").click(function() {
 	$("#addForm").attr("action","../user/add");
 
 	$(":input#name").val("");
-
-	//$(".idForUpdate").remove();
 
 	addRoleBtn();
 });
@@ -82,8 +78,7 @@ $(":input.form-control").focusout(function() {
 	$.ajax({
 		url : "../user/checkAdd",
 		type : 'post',
-		data : "nickName=" + nickName + "&name=" + name + "&pass=" + pass
-				+ "&pass2=" + pass2 + "&email=" + email+"&id="+id,
+		data : "name=" + name + "&pass=" + pass +"&id="+id,
 		dataType : 'html',
 		success : function(data, status) {
 			if (status == "success") {

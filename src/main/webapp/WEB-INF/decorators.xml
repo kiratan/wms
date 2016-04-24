@@ -3,12 +3,13 @@
 	<excludes>
 		<pattern>/resources/*</pattern>
 	</excludes>
-	
+
 	<decorator name="default" page="default.jsp">
 		<pattern>/*</pattern>
 	</decorator>
-	
+
 	<decorator name="login" page="login.jsp">
 		<pattern>/*/login/*</pattern>
+		<pattern>/login/*</pattern>
 	</decorator>
 </decorators>

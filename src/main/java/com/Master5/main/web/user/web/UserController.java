@@ -26,6 +26,7 @@ import com.Master5.main.utils.constant.Key;
 import com.Master5.main.utils.constant.MsgKey;
 import com.Master5.main.utils.constant.MsgTips;
 import com.Master5.main.utils.constant.SysKey;
+import com.Master5.main.utils.encrypt.MD5;
 import com.Master5.main.web.role.entry.Role;
 import com.Master5.main.web.role.service.RoleService;
 import com.Master5.main.web.user.entry.User;
@@ -96,8 +97,8 @@ public class UserController {
 	@RequiresPermissions(value = "user:modify")
 	@CheckPermission(name = "添加用户", method = "user:modify", state = SysKey.STATE_DEFAULT_ADMIN)
 	@RequestMapping(value = "modify", method = RequestMethod.POST)
-	public String modify(long id, String nickName, String name, String pass, String pass2, String email, String sex,
-			String roleIds, RedirectAttributes redirectAttributes) {
+	public String modify(long id, String nickName, String name, String pass, String sex, String roleIds,
+			RedirectAttributes redirectAttributes) {
 
 		List<String> msgList = new ArrayList<String>();
 
@@ -123,21 +124,6 @@ public class UserController {
 
 		// 如果参数不为空///
 		Set<Role> roleSet = new HashSet<Role>();
-
-		if (StringUtils.isNotEmpty(sex))
-			user.setSex(sex);
-
-		if (StringUtils.isNotEmpty(pass))
-			user.setPass(pass);
-
-		if (StringUtils.isNotEmpty(name))
-			user.setName(name);
-
-		if (StringUtils.isNotEmpty(email))
-			user.setEmail(email);
-
-		if (StringUtils.isNotEmpty(nickName))
-			user.setNickName(nickName);
 
 		if (StringUtils.isNotEmpty(roleIds)) {// 如果是修改操作 并且角色串不是空 解析角色
 
@@ -229,10 +215,49 @@ public class UserController {
 
 		Map<String, String> map = new HashMap<String, String>();
 
-		map.put("errMsg",
-				id == 0 ? checkReg(nickName, name, pass) : checkReg(userService.findById(id), nickName, name, pass));
+		map.put("errMsg", id == 0 ? checkReg(name, pass) : checkReg(userService.findById(id), nickName, name, pass));
 
 		return map;
+	}
+
+	/**
+	 * 修改用户验证的合法性
+	 */
+	private String checkReg(User user, String nickName, String name, String pass) {
+
+		if (null == user)
+			return "修改的用户不存在";
+
+		if (!user.getName().equals(name) && null != name && !"".equals(name)) {
+			if (null != userService.findByName(name))
+				return "用户名已经存在";
+			else if (!ValidateTools.userName(name))
+				return "用户名只能为英文和数字";
+			else if (null == name || name.length() > 18 || name.length() < 6)
+				return "用户名的长度必须在6到18之间";
+			else {
+				user.setName(name);
+			}
+		} else if (!user.getNickName().equals(nickName) && null != nickName && !"".equals(nickName)) {
+
+			if (!ValidateTools.nickName(nickName)) {
+				return "昵称只能为英文数字和汉字";
+			} else if (null == nickName || nickName.length() > 8 || nickName.length() < 2) {
+				return "昵称长度必须2-10";
+			} else {
+				user.setNickName(nickName);
+			}
+		} else if (!user.getPass().equals(MD5.getMD5(pass)) && null != pass && !"".equals(pass)) {
+			if (!ValidateTools.password_reg(pass))
+				return "密码只能为英文字母和数字";
+			else if (null == pass || pass.length() > 18 || pass.length() < 6)
+				return "密码的长度必须在6到18之间";
+			else {
+				user.setPass(pass);
+			}
+		}
+		return "";
+
 	}
 
 	/**
@@ -245,7 +270,13 @@ public class UserController {
 		else if (null == nickName || nickName.length() > 8 || nickName.length() < 2)
 			return "昵称长度必须2-10";
 
-		else if (null != userService.findByName(name))
+		return checkReg(name, pass);
+
+	}
+
+	private String checkReg(String name, String pass) {
+
+		if (null != userService.findByName(name))
 			return "用户名已经存在";
 		else if (!ValidateTools.userName(name))
 			return "用户名只能为英文和数字";
@@ -256,47 +287,6 @@ public class UserController {
 			return "密码只能为英文字母和数字";
 		else if (null == pass || pass.length() > 18 || pass.length() < 6)
 			return "密码的长度必须在6到18之间";
-
-		// else if (null != userService.findByEmail(email))
-		// return "邮箱已经存在";
-		// else if (null == email || !ValidateTools.Email(email))
-		// return "邮箱格式不正确";
-
-		return "";
-
-	}
-
-	/**
-	 * 修改用户验证的合法性
-	 */
-	private String checkReg(User user, String nickName, String name, String pass) {
-
-		if (null == user)
-			return "修改的用户不存在";
-
-		if (null != nickName && !"".equals(nickName)) {
-			if (!ValidateTools.nickName(nickName))
-				return "昵称只能为英文数字和汉字";
-			else if (nickName.length() > 8 || nickName.length() < 2)
-				return "昵称长度必须2-10";
-		}
-
-		if (null != name && !"".equals(name)) {
-			if (null != userService.findByName(name) && !name.equals(user.getName()))
-				return "用户名已经存在";
-			else if (!ValidateTools.userName(name))
-				return "用户名只能为英文和数字";
-			else if (name.length() > 18 || name.length() < 5)
-				return "用户名的长度必须在6到18之间";
-		}
-
-		if (null != pass && !pass.equals("")) {
-			if (!ValidateTools.password_reg(pass))
-				return "密码只能为英文字母和数字";
-			else if (pass.length() > 18 || pass.length() < 5)
-				return "密码的长度必须在6到18之间";
-		}
-
 		return "";
 
 	}

@@ -108,7 +108,7 @@ public class Login {
 		}
 
 		redirectAttributes.addFlashAttribute(MsgKey.msg, msgList);
-		return "/login/regist";
+		return "redirect:/login/list";
 
 	}
 

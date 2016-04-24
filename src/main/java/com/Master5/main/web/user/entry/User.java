@@ -40,8 +40,8 @@ public class User implements Serializable {
 
 	private String pass;
 
-	@Column ( unique = true )
-	private String email;
+//	@Column ( unique = true )
+	private String email="没有email";
 
 	private String sex;
 

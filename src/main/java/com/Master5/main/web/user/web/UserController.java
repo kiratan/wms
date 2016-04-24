@@ -47,22 +47,21 @@ public class UserController {
 	public String findAll(Model model) {
 
 		model.addAttribute("list", userService.findAll());
-		
+
 		return "user/list";
 	}
 
 	@CheckPermission(name = "添加用户", method = "user:add", state = SysKey.STATE_DEFAULT_ADMIN)
 	@RequestMapping(value = "add", method = RequestMethod.POST)
 	@RequiresPermissions(value = "user:add")
-	public String add(String nickName, String name, String pass, String pass2,
-			String email, String sex, String roleIds,
+	public String add(String nickName, String name, String pass, String sex, String roleIds,
 			RedirectAttributes redirectAttributes) {
 
 		List<String> msgList = new ArrayList<String>();
 
 		User user = new User();
 
-		String checkRs = checkReg(nickName, name, pass, pass2, email);
+		String checkRs = checkReg(nickName, name, pass);
 		if (StringUtils.isNotEmpty(checkRs)) {
 			msgList.add(checkRs);
 			redirectAttributes.addFlashAttribute(MsgKey.msg, msgList);
@@ -83,7 +82,6 @@ public class UserController {
 		}
 		user.setSex(sex);
 		user.setPass(pass);
-		user.setEmail(email);
 		user.setName(name);
 		user.setNickName(nickName);
 		if (null != userService.save(user)) {
@@ -98,9 +96,8 @@ public class UserController {
 	@RequiresPermissions(value = "user:modify")
 	@CheckPermission(name = "添加用户", method = "user:modify", state = SysKey.STATE_DEFAULT_ADMIN)
 	@RequestMapping(value = "modify", method = RequestMethod.POST)
-	public String modify(long id, String nickName, String name, String pass,
-			String pass2, String email, String sex, String roleIds,
-			RedirectAttributes redirectAttributes) {
+	public String modify(long id, String nickName, String name, String pass, String pass2, String email, String sex,
+			String roleIds, RedirectAttributes redirectAttributes) {
 
 		List<String> msgList = new ArrayList<String>();
 
@@ -116,8 +113,8 @@ public class UserController {
 			return "redirect:list";
 		}
 
-		String checkRs = checkReg(user, nickName, name, pass, pass2, email);
-		
+		String checkRs = checkReg(user, nickName, name, pass);
+
 		if (StringUtils.isNotEmpty(checkRs)) {
 			msgList.add(checkRs);
 			redirectAttributes.addFlashAttribute(MsgKey.msg, msgList);
@@ -126,51 +123,50 @@ public class UserController {
 
 		// 如果参数不为空///
 		Set<Role> roleSet = new HashSet<Role>();
-		
+
 		if (StringUtils.isNotEmpty(sex))
 			user.setSex(sex);
-		
+
 		if (StringUtils.isNotEmpty(pass))
 			user.setPass(pass);
-		
+
 		if (StringUtils.isNotEmpty(name))
 			user.setName(name);
-		
+
 		if (StringUtils.isNotEmpty(email))
 			user.setEmail(email);
-		
+
 		if (StringUtils.isNotEmpty(nickName))
 			user.setNickName(nickName);
-		
+
 		if (StringUtils.isNotEmpty(roleIds)) {// 如果是修改操作 并且角色串不是空 解析角色
-			
+
 			String[] perIdArray = roleIds.split(",");
-			
+
 			for (String perId : perIdArray) {
 				roleSet.add(roleService.findById(Integer.parseInt(perId)));
 			}
-		
+
 			user.setRoles(roleSet);
 		}
-		
+
 		if (null != userService.save(user)) {
-			
+
 			msgList.add(MsgTips.MODIFY_SUCCESS);
 		} else {
-			
+
 			msgList.add(MsgTips.MODIFY_FAILY);
 		}
-		
+
 		redirectAttributes.addFlashAttribute(MsgKey.msg, msgList);
-		
+
 		return "redirect:list";
 	}
 
 	@RequiresPermissions(value = "user:del")
 	@CheckPermission(name = "删除用户", method = "user:del", state = SysKey.STATE_DEFAULT_ADMIN)
 	@RequestMapping(value = "del/{id}")
-	public String del(@PathVariable long id,
-			RedirectAttributes redirectAttributes) {
+	public String del(@PathVariable long id, RedirectAttributes redirectAttributes) {
 
 		List<String> msgList = new ArrayList<String>();
 
@@ -193,8 +189,7 @@ public class UserController {
 	@RequiresPermissions(value = "user:lock")
 	@CheckPermission(name = "锁定用户", method = "user:lock", state = SysKey.STATE_DEFAULT_ADMIN)
 	@RequestMapping(value = "lock/{id}", method = RequestMethod.GET)
-	public String lock(@PathVariable long id,
-			RedirectAttributes redirectAttributes) {
+	public String lock(@PathVariable long id, RedirectAttributes redirectAttributes) {
 
 		List<String> msgList = new ArrayList<String>();
 
@@ -206,8 +201,7 @@ public class UserController {
 			msgList.add(MsgTips.MODIFY_FAILY);
 			msgList.add(MsgTips.DEFAULT_SYSTEM_DATA);
 		} else {
-			user.setState(user.getState() == SysKey.STATE_NROMAL ? SysKey.STATE_LOCK
-					: SysKey.STATE_NROMAL);
+			user.setState(user.getState() == SysKey.STATE_NROMAL ? SysKey.STATE_LOCK : SysKey.STATE_NROMAL);
 			if (null != userService.save(user)) {
 				msgList.add(MsgTips.MODIFY_SUCCESS);
 			} else {
@@ -231,15 +225,12 @@ public class UserController {
 	 */
 	@RequestMapping(value = "checkAdd", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, String> checkRegAjax(long id, String nickName,
-			String name, String pass, String pass2, String email, String sex) {
+	public Map<String, String> checkRegAjax(long id, String nickName, String name, String pass) {
 
 		Map<String, String> map = new HashMap<String, String>();
 
 		map.put("errMsg",
-				id == 0 ? checkReg(nickName, name, pass, pass2, email)
-						: checkReg(userService.findById(id), nickName, name,
-								pass, pass2, email));
+				id == 0 ? checkReg(nickName, name, pass) : checkReg(userService.findById(id), nickName, name, pass));
 
 		return map;
 	}
@@ -247,15 +238,11 @@ public class UserController {
 	/**
 	 * 添加用户字段验证的合法性
 	 */
-	private String checkReg(String nickName, String name, String pass,
-			String pass2, String email) {
+	private String checkReg(String nickName, String name, String pass) {
 
-		if (null != userService.findByNickName(nickName))
-			return "昵称已经存在";
-		else if (!ValidateTools.nickName(nickName))
+		if (!ValidateTools.nickName(nickName))
 			return "昵称只能为英文数字和汉字";
-		else if (null == nickName || nickName.length() > 8
-				|| nickName.length() < 2)
+		else if (null == nickName || nickName.length() > 8 || nickName.length() < 2)
 			return "昵称长度必须2-10";
 
 		else if (null != userService.findByName(name))
@@ -269,13 +256,11 @@ public class UserController {
 			return "密码只能为英文字母和数字";
 		else if (null == pass || pass.length() > 18 || pass.length() < 6)
 			return "密码的长度必须在6到18之间";
-		else if (null == pass2 || !pass.equals(pass2))
-			return "两次输入的密码不一样";
 
-		else if (null != userService.findByEmail(email))
-			return "邮箱已经存在";
-		else if (null == email || !ValidateTools.Email(email))
-			return "邮箱格式不正确";
+		// else if (null != userService.findByEmail(email))
+		// return "邮箱已经存在";
+		// else if (null == email || !ValidateTools.Email(email))
+		// return "邮箱格式不正确";
 
 		return "";
 
@@ -284,25 +269,20 @@ public class UserController {
 	/**
 	 * 修改用户验证的合法性
 	 */
-	private String checkReg(User user, String nickName, String name,
-			String pass, String pass2, String email) {
+	private String checkReg(User user, String nickName, String name, String pass) {
 
 		if (null == user)
 			return "修改的用户不存在";
 
 		if (null != nickName && !"".equals(nickName)) {
-			if (null != userService.findByNickName(nickName)
-					&& !nickName.equals(user.getNickName()))
-				return "昵称已经存在";
-			else if (!ValidateTools.nickName(nickName))
+			if (!ValidateTools.nickName(nickName))
 				return "昵称只能为英文数字和汉字";
 			else if (nickName.length() > 8 || nickName.length() < 2)
 				return "昵称长度必须2-10";
 		}
 
 		if (null != name && !"".equals(name)) {
-			if (null != userService.findByName(name)
-					&& !name.equals(user.getName()))
+			if (null != userService.findByName(name) && !name.equals(user.getName()))
 				return "用户名已经存在";
 			else if (!ValidateTools.userName(name))
 				return "用户名只能为英文和数字";
@@ -315,16 +295,6 @@ public class UserController {
 				return "密码只能为英文字母和数字";
 			else if (pass.length() > 18 || pass.length() < 5)
 				return "密码的长度必须在6到18之间";
-			else if (!pass.equals(pass2))
-				return "两次输入的密码不一样";
-		}
-
-		if (null != email && !email.equals("")) {
-			if (null != userService.findByEmail(email)
-					&& !email.equals(user.getEmail()))
-				return "邮箱已经存在";
-			else if (!ValidateTools.Email(email))
-				return "邮箱格式不正确";
 		}
 
 		return "";

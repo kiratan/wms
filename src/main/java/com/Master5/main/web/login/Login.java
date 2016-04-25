@@ -3,8 +3,10 @@ package com.Master5.main.web.login;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,6 +27,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.Master5.main.annotation.annotationtools.GetValueFromAnnotation;
@@ -149,6 +152,140 @@ public class Login {
 		msgList.add(Key.SYSTEM_INIT_SUCCESS);
 		redirectAttributes.addFlashAttribute(Key.msg, msgList);
 		return "redirect:/login/list";
+	}
+	
+	@RequiresGuest
+	@RequestMapping(value = "aa")
+	public String getLngLats() {
+
+		return "/login/satemap";
+	}
+	
+	@RequestMapping("/getLngLat")
+	@ResponseBody
+	public List<Map<String, Object>> getLngLat(){
+		Map<String,Object> conditonMap=new HashMap<String,Object>();
+		List<Map<String,Object>> resList= new ArrayList<Map<String,Object>>();
+		List<String> tempList=new ArrayList<String>();
+		tempList.add("113.67566,34.753844");
+		tempList.add("113.675381,34.75391");
+		tempList.add("113.675306,34.75372");
+		tempList.add("113.675585,34.75365");
+		conditonMap.put("LngLat", tempList);
+		conditonMap.put("center", "113.675424,34.7538");
+		resList.add(conditonMap);
+		
+		tempList=new ArrayList<String>();
+		conditonMap=new HashMap<String,Object>();
+		tempList.add("113.721805,34.769826");
+		tempList.add("113.721386,34.769429");
+		tempList.add("113.721982,34.768962");
+		tempList.add("113.72247,34.769346");
+		conditonMap.put("LngLat", tempList);
+		conditonMap.put("center", "113.721934,34.769366");
+		resList.add(conditonMap);
+		
+		tempList=new ArrayList<String>();
+		conditonMap=new HashMap<String,Object>();
+		tempList.add("113.722507,34.769275");
+		tempList.add("113.722094,34.768923");
+		tempList.add("113.722792,34.768389");
+		tempList.add("113.723216,34.768724");
+		conditonMap.put("LngLat", tempList);
+		conditonMap.put("center", "113.722674,34.768797");
+		resList.add(conditonMap);
+		
+		tempList=new ArrayList<String>();
+		conditonMap=new HashMap<String,Object>();
+		tempList.add("113.729953,34.777006");
+		tempList.add("113.729326,34.777196");
+		tempList.add("113.729256,34.777006");
+		tempList.add("113.729873,34.776817");
+		conditonMap.put("LngLat", tempList);
+		conditonMap.put("center", "113.729508,34.777037");
+		resList.add(conditonMap);
+		
+		
+		tempList=new ArrayList<String>();
+		conditonMap=new HashMap<String,Object>();
+		tempList.add("113.730935,34.776874");
+		tempList.add("113.73064,34.77702");
+		tempList.add("113.730388,34.776641");
+		tempList.add("113.730683,34.776508");
+		conditonMap.put("LngLat", tempList);
+		conditonMap.put("center", "113.730608,34.776729");
+		resList.add(conditonMap);
+		
+		tempList=new ArrayList<String>();
+		conditonMap=new HashMap<String,Object>();
+		tempList.add("113.732571,34.769414");
+		tempList.add("113.731713,34.768691");
+		tempList.add("113.73218,34.76822");
+		tempList.add("113.733145,34.769198");
+		conditonMap.put("LngLat", tempList);
+		conditonMap.put("center", "113.732469,34.768819");
+		resList.add(conditonMap);
+		
+		tempList=new ArrayList<String>();
+		conditonMap=new HashMap<String,Object>();
+		tempList.add("113.7316,34.768497");
+		tempList.add("113.73079,34.768057");
+		tempList.add("113.731187,34.767621");
+		tempList.add("113.731944,34.768096");
+		conditonMap.put("LngLat", tempList);
+		conditonMap.put("center", "113.731252,34.767982");
+		resList.add(conditonMap);
+		
+		
+		tempList=new ArrayList<String>();
+		conditonMap=new HashMap<String,Object>();
+		tempList.add("113.723634,34.777945");
+		tempList.add("113.722459,34.777526");
+		tempList.add("113.722819,34.777125");
+		tempList.add("113.723822,34.777456");
+		conditonMap.put("LngLat", tempList);
+		conditonMap.put("center", "113.722926,34.777376");
+		resList.add(conditonMap);
+		
+		
+		tempList=new ArrayList<String>();
+		conditonMap=new HashMap<String,Object>();
+		tempList.add("113.722036,34.777174");
+		tempList.add("113.721537,34.776843");
+		tempList.add("113.721998,34.77653");
+		tempList.add("113.722406,34.776856");
+		conditonMap.put("LngLat", tempList);
+		conditonMap.put("center", "113.721966,34.776804");
+		resList.add(conditonMap);
+
+		tempList=new ArrayList<String>();
+		conditonMap=new HashMap<String,Object>();
+		tempList.add("113.727899,34.771119");
+		tempList.add("113.727277,34.771393");
+		tempList.add("113.726665,34.771093");
+		tempList.add("113.72666,34.770674");
+		tempList.add("113.726633,34.770361");
+		tempList.add("113.727298,34.770234");
+		tempList.add("113.727985,34.770388");
+		tempList.add("113.727899,34.770727");
+		conditonMap.put("LngLat", tempList);
+		conditonMap.put("center", "113.727566,34.770802");
+		resList.add(conditonMap);
+		
+//		tempList=new ArrayList<String>();
+//		conditonMap=new HashMap<String,Object>();
+//		tempList.add("113.646268,34.755067");
+//		tempList.add("113.645989,34.755058");
+//		tempList.add("113.645834,34.75493");
+//		tempList.add("113.645635,34.754864");
+//		tempList.add("113.645501,34.754736");
+//		tempList.add("113.645501,34.754512");
+//		tempList.add("113.646113,34.754503");
+//		tempList.add("113.646258,34.755049");
+//		conditonMap.put("LngLat", tempList);
+//		conditonMap.put("center", "113.64578,34.754776");
+//		resList.add(conditonMap);
+		return  resList;
 	}
 
 }

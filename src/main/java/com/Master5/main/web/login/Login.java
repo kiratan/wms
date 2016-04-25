@@ -158,7 +158,7 @@ public class Login {
 	@RequestMapping(value = "aa")
 	public String getLngLats() {
 
-		return "/login/satemap";
+		return "/login/map";
 	}
 	
 	@RequestMapping("/getLngLat")

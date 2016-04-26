@@ -55,12 +55,19 @@ public class Login {
 
 	@Autowired
 	RoleService roleService;
+	
+//	@RequiresGuest
+//	@RequestMapping
+//	public String loginMe() {
+//
+//		return "/login/regist";
+//	}
 
 	/**
 	 * 登录主页面
 	 */
 	@RequiresGuest
-	@RequestMapping(value = "list")
+	@RequestMapping
 	public String login() {
 
 		return "/login/regist";
@@ -108,7 +115,7 @@ public class Login {
 		}
 
 		redirectAttributes.addFlashAttribute(MsgKey.msg, msgList);
-		return "redirect:/login/list";
+		return "redirect:/login";
 
 	}
 
@@ -122,7 +129,7 @@ public class Login {
 		if (null != roleService.findByState(Key.STATE_DEFAULT_ADMIN)) {
 			msgList.add(Key.SYSTEM_INIT_FAILY);
 			redirectAttributes.addFlashAttribute(Key.msg, msgList);
-			return "redirect:/login/list";
+			return "redirect:/login";
 		}
 		Set<Class<?>> classes = GetClassByPackage.getInstance().getClasses(pack);
 		Set<Permission> permissions = GetValueFromAnnotation.getInstance().getPermissions(classes);
@@ -148,7 +155,7 @@ public class Login {
 
 		msgList.add(Key.SYSTEM_INIT_SUCCESS);
 		redirectAttributes.addFlashAttribute(Key.msg, msgList);
-		return "redirect:/login/list";
+		return "redirect:/login";
 	}
 
 	@RequiresGuest

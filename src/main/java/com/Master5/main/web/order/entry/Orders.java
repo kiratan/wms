@@ -13,6 +13,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapKey;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.Master5.main.web.user.entry.User;
@@ -31,7 +32,9 @@ public class Orders {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 
-	private int supplierID;
+	@ManyToOne
+	@JoinColumn(name="supplierID")
+	private Supplier supplierID;
 
 	private int status;
 
@@ -52,6 +55,10 @@ public class Orders {
 	@ManyToMany
 	@JoinTable(name = "orders_ingredient", joinColumns = {@JoinColumn(name = "orders_id")}, inverseJoinColumns = {@JoinColumn(name = "ingredient_id")})
 	private List<Ingredient> ingredients;
+	
+	@OneToMany
+	@JoinColumn(name="orders_id")
+	private List<OrdersIngredient> detail;
 
 	public int getId() {
 		return id;
@@ -61,12 +68,21 @@ public class Orders {
 		this.id = id;
 	}
 
-	public int getSupplierID() {
+
+	public Supplier getSupplierID() {
 		return supplierID;
 	}
 
-	public void setSupplierID(int supplierID) {
+	public void setSupplierID(Supplier supplierID) {
 		this.supplierID = supplierID;
+	}
+
+	public List<OrdersIngredient> getDetail() {
+		return detail;
+	}
+
+	public void setDetail(List<OrdersIngredient> detail) {
+		this.detail = detail;
 	}
 
 	public int getStatus() {

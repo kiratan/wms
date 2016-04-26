@@ -20,7 +20,7 @@ import javax.persistence.UniqueConstraint;
  */
 @Entity
 @Table(name = "ingredient", uniqueConstraints = { @UniqueConstraint(columnNames = { "name" }) })
-public class Goods {
+public class Ingredient {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

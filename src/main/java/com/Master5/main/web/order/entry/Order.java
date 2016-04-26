@@ -13,6 +13,6 @@ import javax.persistence.OneToMany;
 public class Order {
 	
 	@OneToMany(mappedBy="person",cascade=CascadeType.ALL)
-	private List<Goods> goods;
+	private List<Ingredient> goods;
 
 }

@@ -16,7 +16,7 @@ import javax.persistence.UniqueConstraint;
  */
 @Entity
 @Table(name = "ingredient", uniqueConstraints = { @UniqueConstraint(columnNames = { "name" }) })
-public class ISP {
+public class Supplier {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

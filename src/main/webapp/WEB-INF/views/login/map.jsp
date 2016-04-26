@@ -37,16 +37,9 @@
 				 	zoom: 16,
 				 	zooms:[14,18],
 		  	 	});
-// 				map.setLayers({
-// 				 	layers: [new AMap.TileLayer.Satellite()],
-// 				 	center: [113.726751,34.772395],
-// 				 	rotation : 0,
-// 				 	zoom: 16,
-// 				 	zooms:[14,18]
-// 		  	 	})
 				isSateMap=true;
-				AMap.event.addListener(map, 'zoomend', _onZoomEnd);
-				getLngLat();//圈图
+				 AMap.event.addListener(map, 'zoomend', _onZoomEnd); 
+				  getLngLat();//圈图 
 			}
 		 if (map.getZoom() <15 && isSateMap==true){
 			 map = new AMap.Map('container', {
@@ -92,7 +85,7 @@
 		    polygon.setMap(map);
 		    polygon.setExtData(data[i]);
 		}
-	    map.setFitView()
+	  /*   map.setFitView() */
 	}
 	 function loadOtherData(e) {
 		 	var Obj = e.target.getExtData();

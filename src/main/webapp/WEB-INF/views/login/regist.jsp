@@ -7,8 +7,13 @@
 <title>登录</title>
 </head>
 <body>
+
 <div class="col-md-offset-4 col-sm-3 wrapper text-center"  >
-	<img  class="img-circle" id="headImg" src="${ctx}/resources/img/defaultHead.png">
+
+	<div>
+		<span class="glyphicon glyphicon-fire info" aria-hidden="true" style="font-size: 120px;color: #000;"></span>
+	</div>
+	<%-- <img  class="img-circle" id="headImg" src="${ctx}/resources/img/defaultHead.png"> --%>
 	<br/><br/>
 	<form class="form-horizontal" role="form"  action="${ctx}/login/loging" method="post">
 		<div class="form-group" id="regForm">

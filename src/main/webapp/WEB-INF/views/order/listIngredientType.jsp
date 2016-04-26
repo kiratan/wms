@@ -33,14 +33,14 @@
 
 				<c:forEach items="${list}" var="list">
 					<tr class="table-bordered">
-						  	<td class="table-bordered id">${list.id}</td>
-				            <td class="table-bordered name">${list.name}</td>
-							<td class="danger table-bordered">
-							<a href="${ctx}/order/delIngredientType/${list.id}"> <span class="glyphicon glyphicon-trash"> </span> </a> | 
-				            <a class="update" data-toggle="modal" data-target="#myModal"  href="#">
-				             	<span class="glyphicon glyphicon-pencil"></span> 
-				            </a>
-							</td>
+					  	<td class="table-bordered id">${list.id}</td>
+			            <td class="table-bordered name">${list.name}</td>
+						<td class="danger table-bordered">
+						<a href="${ctx}/order/delIngredientType/${list.id}"> <span class="glyphicon glyphicon-trash"> </span> </a> | 
+			            <a class="update" data-toggle="modal" data-target="#myModal"  href="#">
+			             	<span class="glyphicon glyphicon-pencil"></span> 
+			            </a>
+						</td>
 					</tr>
 				</c:forEach>
 

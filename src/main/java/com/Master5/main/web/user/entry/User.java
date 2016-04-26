@@ -18,8 +18,6 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
-import com.Master5.main.utils.encrypt.MD5;
-
 @Entity
 @Table(name = "user", uniqueConstraints = { @UniqueConstraint(columnNames = { "name", "nickName" }) })
 public class User implements Serializable {

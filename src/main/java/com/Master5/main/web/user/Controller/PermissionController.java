@@ -12,7 +12,6 @@ import org.slf4j.LoggerFactory ;
 import org.springframework.beans.factory.annotation.Autowired ;
 import org.springframework.stereotype.Controller ;
 import org.springframework.ui.Model ;
-import org.springframework.validation.BindingResult ;
 import org.springframework.web.bind.annotation.ModelAttribute ;
 import org.springframework.web.bind.annotation.PathVariable ;
 import org.springframework.web.bind.annotation.RequestMapping ;
@@ -25,10 +24,7 @@ import com.Master5.main.utils.constant.Key;
 import com.Master5.main.utils.constant.MsgKey;
 import com.Master5.main.utils.constant.MsgTips;
 import com.Master5.main.utils.constant.SysKey;
-import com.Master5.main.web.play.QrcodeController;
 import com.Master5.main.web.user.entry.Permission;
-import com.Master5.main.web.user.entry.Role;
-import com.Master5.main.web.user.entry.User;
 import com.Master5.main.web.user.service.PermissionService;
 
 @Controller

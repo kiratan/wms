@@ -1,8 +1,6 @@
 
 package com.Master5.main.utils.constant;
 
-import com.Master5.main.utils.encrypt.MD5;
-
 public interface SysKey {
 
 	/**

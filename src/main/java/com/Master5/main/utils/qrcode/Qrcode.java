@@ -1,5 +1,15 @@
 package com.Master5.main.utils.qrcode;
 
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.imageio.ImageIO;
+
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Binarizer;
 import com.google.zxing.BinaryBitmap;
@@ -11,15 +21,6 @@ import com.google.zxing.Result;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.common.HybridBinarizer;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
-
-import javax.imageio.ImageIO;
-import java.io.File;
-import java.io.OutputStream;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
 
 public final class Qrcode {
 

@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletResponse ;
 import javax.servlet.http.HttpSession ;
 
 import org.apache.shiro.SecurityUtils ;
-import org.apache.shiro.authz.AuthorizationException ;
 import org.apache.shiro.subject.Subject ;
 import org.springframework.beans.factory.annotation.Autowired ;
 import org.springframework.web.method.HandlerMethod ;

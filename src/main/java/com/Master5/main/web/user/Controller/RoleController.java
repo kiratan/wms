@@ -10,7 +10,6 @@ import java.util.Set ;
 import org.apache.commons.lang.StringUtils ;
 import org.apache.log4j.Logger ;
 import org.apache.shiro.authz.annotation.RequiresPermissions ;
-import org.apache.shiro.authz.annotation.RequiresRoles ;
 import org.springframework.beans.factory.annotation.Autowired ;
 import org.springframework.stereotype.Controller ;
 import org.springframework.ui.Model ;

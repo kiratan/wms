@@ -15,18 +15,13 @@ import org.apache.shiro.authc.UsernamePasswordToken ;
 import org.apache.shiro.authz.AuthorizationException ;
 import org.apache.shiro.authz.AuthorizationInfo ;
 import org.apache.shiro.authz.SimpleAuthorizationInfo ;
-import org.apache.shiro.cache.Cache ;
 import org.apache.shiro.realm.AuthorizingRealm ;
 import org.apache.shiro.subject.PrincipalCollection ;
-import org.apache.shiro.subject.SimplePrincipalCollection ;
-import org.springframework.beans.factory.annotation.Autowired ;
-import org.springframework.beans.factory.annotation.Qualifier ;
 
 import com.Master5.main.web.user.dao.UserDao;
 import com.Master5.main.web.user.entry.Permission;
 import com.Master5.main.web.user.entry.Role;
 import com.Master5.main.web.user.entry.User;
-import com.Master5.main.web.user.service.UserService;
 
 public class ShiroRealm extends AuthorizingRealm {
 

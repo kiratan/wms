@@ -15,8 +15,8 @@ import javax.persistence.UniqueConstraint;
  *
  */
 @Entity
-@Table(name = "goodsType", uniqueConstraints = { @UniqueConstraint(columnNames = { "name" }) })
-public class GoodsType {
+@Table(name = "ingredient_type")
+public class IngredientType {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,4 +25,21 @@ public class GoodsType {
 	@Column(unique = true)
 	private String name;
 
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	
 }

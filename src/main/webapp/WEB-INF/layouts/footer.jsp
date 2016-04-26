@@ -28,7 +28,8 @@
 				  		</ul>
 					    <ul class="nav navbar-nav navbar-right">
 						      <li class="dropdown">
-						        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span>&nbsp;&nbsp;管理
+						        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+						        <span class="glyphicon glyphicon-cog"></span>&nbsp;&nbsp;管理
 						        <b class="caret"></b>&nbsp;&nbsp;&nbsp;&nbsp;</a>
 						        <ul class="dropdown-menu">
 								        <shiro:guest>
@@ -45,40 +46,55 @@
 						        </ul>
 						      </li>
 					    </ul>
-					    <shiro:authenticated>
-							     <ul class="nav navbar-nav navbar-right">
-								      <li class="dropdown">
-								        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span>&nbsp;&nbsp;管理员工具
-								        <b class="caret"></b>&nbsp;&nbsp;&nbsp;&nbsp;</a>
-								        <ul class="dropdown-menu">
-								        <shiro:hasPermission name="user:list">
-									        <li><a href="${ctx}/user/list">用户管理</a></li>
-									        </shiro:hasPermission>
-									     <%--    <shiro:hasPermission name="role:list"> --%>
-									     	 <li><a href="${ctx}/role/list">角色管理</a></li>
-								<%-- 	     	 </shiro:hasPermission> --%>
-									     	 <shiro:hasPermission name="permission:list">
-									      	<li><a href="${ctx}/permission/list">权限管理</a></li>
-									      	</shiro:hasPermission>
-									      	 <shiro:hasPermission name="record:list">
-									      	<li><a href="${ctx}/record/list">审查管理</a></li>
-									      	</shiro:hasPermission>
-								    	</ul>
-								      </li>
-							    </ul>
 					    
-							       <ul class="nav navbar-nav navbar-right">
-									      <li class="dropdown">
-									        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span>
-									        &nbsp;&nbsp;娱乐
-									        <b class="caret"></b>&nbsp;&nbsp;&nbsp;&nbsp;</a>
-									        <ul class="dropdown-menu">
-												      <shiro:hasPermission name="play:qrcode">
-													       <li><a href="${ctx}/play/qrcode/menu">二维码</a></li>
-													  </shiro:hasPermission>
-									    	</ul>
-									      </li>
-							    </ul>
+					 	<ul class="nav navbar-nav navbar-right">
+							      <li class="dropdown">
+							        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+							        <span class="glyphicon glyphicon-cog">
+							        </span>&nbsp;&nbsp;订单管理
+							        <b class="caret"></b>&nbsp;&nbsp;&nbsp;&nbsp;</a>
+							        <ul class="dropdown-menu">
+								        <li><a href="${ctx}/order/list">订单列表</a></li>
+							    	</ul>
+							      </li>
+						    </ul>
+					    
+					    <shiro:authenticated>
+						     <ul class="nav navbar-nav navbar-right">
+							      <li class="dropdown">
+							        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+							        <span class="glyphicon glyphicon-cog">
+							        </span>&nbsp;&nbsp;管理员工具
+							        <b class="caret"></b>&nbsp;&nbsp;&nbsp;&nbsp;</a>
+							        <ul class="dropdown-menu">
+							        <shiro:hasPermission name="user:list">
+								        <li><a href="${ctx}/user/list">用户管理</a></li>
+								        </shiro:hasPermission>
+								     <%--    <shiro:hasPermission name="role:list"> --%>
+								     	 <li><a href="${ctx}/role/list">角色管理</a></li>
+							<%-- 	     	 </shiro:hasPermission> --%>
+								     	 <shiro:hasPermission name="permission:list">
+								      	<li><a href="${ctx}/permission/list">权限管理</a></li>
+								      	</shiro:hasPermission>
+								      	 <shiro:hasPermission name="record:list">
+								      	<li><a href="${ctx}/record/list">审查管理</a></li>
+								      	</shiro:hasPermission>
+							    	</ul>
+							      </li>
+						    </ul>
+				    
+					       <ul class="nav navbar-nav navbar-right">
+							      <li class="dropdown">
+							        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span>
+							        &nbsp;&nbsp;娱乐
+							        <b class="caret"></b>&nbsp;&nbsp;&nbsp;&nbsp;</a>
+							        <ul class="dropdown-menu">
+									      <shiro:hasPermission name="play:qrcode">
+										       <li><a href="${ctx}/play/qrcode/menu">二维码</a></li>
+										  </shiro:hasPermission>
+							    	</ul>
+							      </li>
+					   		 </ul>
 					     </shiro:authenticated>
 						    <c:if test="${msg!=null}">
 								    <ul class="nav navbar-nav navbar-right">

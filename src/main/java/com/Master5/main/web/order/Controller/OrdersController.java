@@ -54,13 +54,13 @@ public class OrdersController {
 		orderService.addIngredientType(type);
 		msgList.add("添加成功");
 		redirectAttributes.addFlashAttribute(MsgKey.msg, msgList);
-		return "redirect:list";
+		return "redirect:listIngredientType";
 	}
 
 	@RequestMapping(value = "delIngredientType/{id}")
 	public String delIngredientType(@PathVariable int id) {
 		orderService.delete(id);
-		return "redirect:list";
+		return "redirect:listIngredientType";
 	}
 
 }

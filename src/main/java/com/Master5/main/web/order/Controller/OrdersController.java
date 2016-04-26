@@ -33,10 +33,11 @@ public class OrdersController {
 		return "order/list";
 	}
 
-	@RequestMapping(value = "add", method = RequestMethod.POST)
-	public String add(IngredientType type,RedirectAttributes redirectAttributes) {
+	@RequestMapping(value = "addIngredientType", method = RequestMethod.POST)
+	public String addIngredientType(IngredientType type,RedirectAttributes redirectAttributes) {
 		orderService.addIngredientType(type);
 		List<String> msgList = new ArrayList<String>();
+		msgList.add("添加成功");
 		redirectAttributes.addFlashAttribute(MsgKey.msg, msgList);
 		return "redirect:list";
 	}

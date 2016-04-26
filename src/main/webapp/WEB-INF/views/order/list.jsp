@@ -57,69 +57,16 @@
 					<button type="button" class="close" data-dismiss="modal">
 						<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
 					</button>
-					<h4 class="modal-title" id="myModalLabel">添加用户</h4>
+					<h4 class="modal-title" id="myModalLabel">添加</h4>
 				</div>
-				   <form id="addForm" role="form" action="../user/add" method="post">
-				   <input class='idForUpdate' type='hidden' name='id' value="0">
-				   <input type="hidden" id="roleIds" name="roleIds">
+				   <form id="addForm" role="form" action="${ctx}/order/IngredientType" method="post">
 					<div class="modal-body" >
 					<div class="alert alert-danger errMsg small"></div>
 						<!-- 弹框内容  -->
-							 <div class="form-group"  id="nickNameErr">
-							 <div class="input-group">
-							 <span class="input-group-addon alert-info"> 昵&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;称</span>
-							<input type="text" class="form-control" name="nickName" id="nickName" placeholder="请输入你的用户名">
-							</div>
+					 	<div class="input-group">
+						 <span class="input-group-addon alert-info form-control"> 名称</span>
+						<input type="text" class="form-control" name="type" placeholder="请输入">
 						</div>
-						<div class="form-group">
-							 <div class="input-group"  id="nameErr">
-							 <span class="input-group-addon alert-info">用&nbsp;&nbsp;户&nbsp;&nbsp;名</span>
-							<input type="text" class="form-control" name="name" id="name" placeholder="请输入你的用户名">
-							</div>
-						</div>
-						<div class="form-group"  id="passErr">
-							<div class=" input-group" >
-							<span class="input-group-addon alert-info">密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码</span>
-							<input type="text"  class="form-control" name="pass" id="pass"  placeholder="请输入你的密码">
-							</div>
-						</div>
-							<div class="form-group"  id="pass2Err">
-							<div class="input-group" >
-							<span class="input-group-addon alert-info">重复密码</span> 
-							<input type="text"  class="form-control" name="pass2" id="pass2"  placeholder="请输入你的密码">
-							</div>
-						</div>
-<!-- 						<div class="form-group" id="emailErr">
-							<div class="input-group" >
-							<span class="input-group-addon alert-info">邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱</span>
-							 <input type="email" class="form-control" name="email" id="email" placeholder="请输入你的邮箱">
-							 </div>
-						</div> -->
-						<div class="form-group">
-						<div class="input-group" >
-						<span class="input-group-addon alert-info">性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别</span>
-						<div class="btn-group col-sm-8" data-toggle="buttons">
-						  <label class="btn alert-warning active ">
-						    <input type="radio" name="sex" id="sex1" value="男" checked>&nbsp;&nbsp; &nbsp;&nbsp;男&nbsp;&nbsp;&nbsp;&nbsp;
-						  </label>
-						  <label class="btn alert-danger">
-						    <input type="radio" name="sex" id="sex2" value="女"> &nbsp;&nbsp;&nbsp;&nbsp;女&nbsp;&nbsp;
-						  </label>
-<!-- 						  <label class="btn alert-info">
-						    <input type="radio" name="sex" id="sex3" value="人妖">&nbsp;&nbsp;&nbsp;&nbsp;人妖&nbsp;&nbsp;
-						  </label> -->
-						</div>
-						</div>
-							</div>
-						<div class="alert alert-warning">
-							<!-- 内容 -->
-							<span>角色列表</span>
-							<br /><br />
-								<div  class="btn-group roles" data-toggle="buttons">
-								</div>
-						<!-- 内容 -->
-						</div>
-
 						<!-- 弹框内容  -->
 					</div>
 

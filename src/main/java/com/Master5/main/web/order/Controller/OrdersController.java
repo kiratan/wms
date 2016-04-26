@@ -59,8 +59,8 @@ public class OrdersController {
 
 	@RequestMapping(value = "delIngredientType/{id}")
 	public String delIngredientType(@PathVariable int id) {
-		orderService.delete(id);
-		return "redirect:listIngredientType";
+		orderService.deleteIngredientType(id);
+		return "redirect:../listIngredientType";
 	}
 
 }

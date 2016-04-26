@@ -13,8 +13,8 @@ import org.springframework.web.filter.CharacterEncodingFilter;
 
 public class WebFilter extends CharacterEncodingFilter {
 
-	String[] notFilter = new String[] { "/login/", "/login/regist", "/login/login",
-			"/login/checkRegAjax" };
+//	String[] notFilter = new String[] { "/login/", "/login/regist", "/login/login",
+//			"/login/checkRegAjax" };
 
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
@@ -61,26 +61,26 @@ public class WebFilter extends CharacterEncodingFilter {
 		filterChain.doFilter(request, response);
 	}
 
-	private void redirectLogin(HttpServletRequest request, HttpServletResponse response, Object obj)
-			throws IOException {
-
-		PrintWriter out = response.getWriter();
-		StringBuilder builder = new StringBuilder();
-		String url = request.getRequestURL().toString();
-		if (null == obj)
-			url = url.substring(0, url.indexOf(request.getContextPath())
-					+ request.getContextPath().length())
-					+ "/login/";
-		else
-			url = url.substring(0, url.indexOf(request.getContextPath())
-					+ request.getContextPath().length())
-					+ "/user/menu";
-		builder.append("<script type=\"text/javascript\">");
-		builder.append("window.top.location.href='");
-		builder.append(url);
-		builder.append("';");
-		builder.append("</script>");
-
-		out.print(builder.toString());
-	}
+//	private void redirectLogin(HttpServletRequest request, HttpServletResponse response, Object obj)
+//			throws IOException {
+//
+//		PrintWriter out = response.getWriter();
+//		StringBuilder builder = new StringBuilder();
+//		String url = request.getRequestURL().toString();
+//		if (null == obj)
+//			url = url.substring(0, url.indexOf(request.getContextPath())
+//					+ request.getContextPath().length())
+//					+ "/login/";
+//		else
+//			url = url.substring(0, url.indexOf(request.getContextPath())
+//					+ request.getContextPath().length())
+//					+ "/user/menu";
+//		builder.append("<script type=\"text/javascript\">");
+//		builder.append("window.top.location.href='");
+//		builder.append(url);
+//		builder.append("';");
+//		builder.append("</script>");
+//
+//		out.print(builder.toString());
+//	}
 }

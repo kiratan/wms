@@ -1,4 +1,4 @@
-package com.Master5.main.web.user.web;
+package com.Master5.main.web.user.Controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -35,6 +35,8 @@ public class OrdersController {
 
 	@RequestMapping(value = "addIngredientType", method = RequestMethod.POST)
 	public String addIngredientType(IngredientType type,RedirectAttributes redirectAttributes) {
+		
+		System.out.println(type.getName()+"=====");
 		orderService.addIngredientType(type);
 		List<String> msgList = new ArrayList<String>();
 		msgList.add("添加成功");

@@ -59,20 +59,19 @@
 					</button>
 					<h4 class="modal-title" id="myModalLabel">添加</h4>
 				</div>
-				   <form id="addForm" role="form" action="${ctx}/order/IngredientType" method="post">
+				   <form id="addForm" role="form" action="${ctx}/order/addIngredientType" method="post">
 					<div class="modal-body" >
-					<div class="alert alert-danger errMsg small"></div>
 						<!-- 弹框内容  -->
 					 	<div class="input-group">
 						 <span class="input-group-addon alert-info form-control"> 名称</span>
-						<input type="text" class="form-control" name="type" placeholder="请输入">
+						<input type="text" class="form-control" name="name" placeholder="请输入">
 						</div>
 						<!-- 弹框内容  -->
 					</div>
 
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-						<button id="enter" type="submit" class="btn btn-info pull-right disabled">添加</button>
+						<button id="enter" type="submit" class="btn btn-info pull-right">添加</button>
 					</div>
 
 				</form>

@@ -33,7 +33,6 @@
 						        <b class="caret"></b>&nbsp;&nbsp;&nbsp;&nbsp;</a>
 						        <ul class="dropdown-menu">
 								        <shiro:guest>
-<!-- 								          <li class="small"><a href="#" data-toggle="modal" data-target="#myModal">注册</a></li> -->
 								          <li class="small"><a href="${ctx}/login/list" >登录</a></li>
 								        </shiro:guest>
 								         <shiro:authenticated>
@@ -55,6 +54,7 @@
 							        <b class="caret"></b>&nbsp;&nbsp;&nbsp;&nbsp;</a>
 							        <ul class="dropdown-menu">
 								        <li><a href="${ctx}/order/list">订单列表</a></li>
+								        <li><a href="${ctx}/order/listIngredientType">商品类型列表</a></li>
 							    	</ul>
 							      </li>
 						    </ul>

@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.MapKey;
 import javax.persistence.Table;
 
@@ -23,8 +24,8 @@ import com.Master5.main.web.user.entry.User;
  *
  */
 @Entity
-@Table(name = "order")
-public class Order {
+@Table(name = "orders")
+public class Orders {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -38,18 +39,18 @@ public class Order {
 
 	private Date createtime;
 
-	@JoinColumn(name="buyyerID")
+	@ManyToOne
 	private User buyyer;
 
 	private Date buttime;
-
-	@JoinColumn(name="managerID")
+	
+	@ManyToOne
 	private User manager;
 
 	private Date intime;
 
 	@ManyToMany
-	@JoinTable(name = "order_ingredient", joinColumns = {@JoinColumn(name = "order_id")}, inverseJoinColumns = {@JoinColumn(name = "ingredient_id")})
+	@JoinTable(name = "orders_ingredient", joinColumns = {@JoinColumn(name = "orders_id")}, inverseJoinColumns = {@JoinColumn(name = "ingredient_id")})
 	private List<Ingredient> ingredients;
 
 	public int getId() {

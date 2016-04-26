@@ -9,16 +9,16 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "order_ingredient")
-public class OrderIngredient {
+@Table(name = "orders_ingredient")
+public class OrdersIngredient {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 
 	@ManyToOne
-	@JoinColumn(name = "order_id")
-	private Order orderId;
+	@JoinColumn(name = "orders_id")
+	private Orders ordersId;
 
 	@ManyToOne
 	@JoinColumn(name = "ingredient_id")
@@ -35,12 +35,17 @@ public class OrderIngredient {
 	}
 
 
-	public Order getOrderId() {
-		return orderId;
+	public Orders getOrderId() {
+		return ordersId;
 	}
 
-	public void setOrderId(Order orderId) {
-		this.orderId = orderId;
+
+	public Orders getOrdersId() {
+		return ordersId;
+	}
+
+	public void setOrdersId(Orders ordersId) {
+		this.ordersId = ordersId;
 	}
 
 	public Ingredient getIngredientId() {

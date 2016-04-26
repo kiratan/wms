@@ -25,13 +25,13 @@ import com.Master5.main.web.user.entry.User;
 @Entity
 @Table(name = "orders")
 public class Orders {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 
 	@ManyToOne
-	@JoinColumn(name="supplierID")
+	@JoinColumn(name = "supplierID")
 	private Supplier supplierID;
 
 	private int status;
@@ -44,18 +44,19 @@ public class Orders {
 	private User buyyer;
 
 	private Date buttime;
-	
+
 	@ManyToOne
 	private User manager;
 
 	private Date intime;
 
 	@ManyToMany
-	@JoinTable(name = "orders_ingredient", joinColumns = {@JoinColumn(name = "orders_id")}, inverseJoinColumns = {@JoinColumn(name = "ingredient_id")})
+	@JoinTable(name = "orders_ingredient", joinColumns = { @JoinColumn(name = "orders_id") }, inverseJoinColumns = {
+			@JoinColumn(name = "ingredient_id") })
 	private List<Ingredient> ingredients;
-	
+
 	@OneToMany
-	@JoinColumn(name="orders_id")
+	@JoinColumn(name = "orders_id")
 	private List<OrdersIngredient> detail;
 
 	public int getId() {
@@ -65,7 +66,6 @@ public class Orders {
 	public void setId(int id) {
 		this.id = id;
 	}
-
 
 	public Supplier getSupplierID() {
 		return supplierID;
@@ -146,7 +146,5 @@ public class Orders {
 	public void setIngredients(List<Ingredient> ingredients) {
 		this.ingredients = ingredients;
 	}
-	
-	
 
 }

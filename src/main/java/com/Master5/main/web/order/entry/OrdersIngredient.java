@@ -34,11 +34,9 @@ public class OrdersIngredient {
 		this.id = id;
 	}
 
-
 	public Orders getOrderId() {
 		return ordersId;
 	}
-
 
 	public Orders getOrdersId() {
 		return ordersId;

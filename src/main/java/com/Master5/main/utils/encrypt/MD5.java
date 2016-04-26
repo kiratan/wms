@@ -3,21 +3,22 @@ package com.Master5.main.utils.encrypt;
 import java.security.MessageDigest;
 
 public class MD5 {
-	
+
 	/**
 	 * 获得加密后的字符串
+	 * 
 	 * @param pass
 	 * @return
 	 */
 	public final static String getMD5Pass(String pass) {
-		
-		return getMD5(pass+"olca").toUpperCase();
+
+		return getMD5(pass + "olca").toUpperCase();
 	}
-	
+
 	public static void main(String[] args) {
-		
+
 		System.out.println(getMD5("admin"));
-		
+
 	}
 
 	public final static String getMD5(String pass) {

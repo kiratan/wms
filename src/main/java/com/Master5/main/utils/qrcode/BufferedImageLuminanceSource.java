@@ -16,15 +16,13 @@ public final class BufferedImageLuminanceSource extends LuminanceSource {
 		this(image, 0, 0, image.getWidth(), image.getHeight());
 	}
 
-	public BufferedImageLuminanceSource(BufferedImage image, int left, int top,
-			int width, int height) {
+	public BufferedImageLuminanceSource(BufferedImage image, int left, int top, int width, int height) {
 		super(width, height);
 
 		int sourceWidth = image.getWidth();
 		int sourceHeight = image.getHeight();
 		if (left + width > sourceWidth || top + height > sourceHeight) {
-			throw new IllegalArgumentException(
-					"Crop rectangle does not fit within image data.");
+			throw new IllegalArgumentException("Crop rectangle does not fit within image data.");
 		}
 
 		for (int y = top; y < top + height; y++) {
@@ -35,8 +33,7 @@ public final class BufferedImageLuminanceSource extends LuminanceSource {
 			}
 		}
 
-		this.image = new BufferedImage(sourceWidth, sourceHeight,
-				BufferedImage.TYPE_BYTE_GRAY);
+		this.image = new BufferedImage(sourceWidth, sourceHeight, BufferedImage.TYPE_BYTE_GRAY);
 		this.image.getGraphics().drawImage(image, 0, 0, null);
 		this.left = left;
 		this.top = top;
@@ -45,8 +42,7 @@ public final class BufferedImageLuminanceSource extends LuminanceSource {
 	@Override
 	public byte[] getRow(int y, byte[] row) {
 		if (y < 0 || y >= getHeight()) {
-			throw new IllegalArgumentException(
-					"Requested row is outside the image: " + y);
+			throw new IllegalArgumentException("Requested row is outside the image: " + y);
 		}
 		int width = getWidth();
 		if (row == null || row.length < width) {
@@ -73,8 +69,7 @@ public final class BufferedImageLuminanceSource extends LuminanceSource {
 
 	@Override
 	public LuminanceSource crop(int left, int top, int width, int height) {
-		return new BufferedImageLuminanceSource(image, this.left + left,
-				this.top + top, width, height);
+		return new BufferedImageLuminanceSource(image, this.left + left, this.top + top, width, height);
 	}
 
 	@Override
@@ -88,19 +83,16 @@ public final class BufferedImageLuminanceSource extends LuminanceSource {
 		int sourceWidth = image.getWidth();
 		int sourceHeight = image.getHeight();
 
-		AffineTransform transform = new AffineTransform(0.0, -1.0, 1.0, 0.0,
-				0.0, sourceWidth);
+		AffineTransform transform = new AffineTransform(0.0, -1.0, 1.0, 0.0, 0.0, sourceWidth);
 
-		BufferedImage rotatedImage = new BufferedImage(sourceHeight,
-				sourceWidth, BufferedImage.TYPE_BYTE_GRAY);
+		BufferedImage rotatedImage = new BufferedImage(sourceHeight, sourceWidth, BufferedImage.TYPE_BYTE_GRAY);
 
 		Graphics2D g = rotatedImage.createGraphics();
 		g.drawImage(image, transform, null);
 		g.dispose();
 
 		int width = getWidth();
-		return new BufferedImageLuminanceSource(rotatedImage, top, sourceWidth
-				- (left + width), getHeight(), width);
+		return new BufferedImageLuminanceSource(rotatedImage, top, sourceWidth - (left + width), getHeight(), width);
 	}
 
 }

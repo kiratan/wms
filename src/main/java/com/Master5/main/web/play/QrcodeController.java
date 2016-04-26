@@ -30,8 +30,7 @@ import com.Master5.main.web.user.dao.UserDao;
 @RequestMapping(value = "/play/qrcode")
 public class QrcodeController {
 
-	private static final Logger logger = LoggerFactory
-			.getLogger(QrcodeController.class);
+	private static final Logger logger = LoggerFactory.getLogger(QrcodeController.class);
 
 	@Autowired
 	UserDao userDao;
@@ -47,8 +46,7 @@ public class QrcodeController {
 	@CheckPermission(name = "二维码执行", method = "play:qrcodeRun", state = SysKey.STATE_DEFAULT_USER)
 	@RequestMapping(value = "creat", method = RequestMethod.GET)
 	@ResponseBody
-	public List<String> qrcode(HttpSession session,
-			HttpServletResponse response, String code, Model model) {
+	public List<String> qrcode(HttpSession session, HttpServletResponse response, String code, Model model) {
 
 		List<String> list = new ArrayList<String>();
 

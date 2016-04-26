@@ -40,5 +40,4 @@ public class IngredientType {
 		this.name = name;
 	}
 
-	
 }

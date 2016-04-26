@@ -27,8 +27,8 @@ public class Ingredient {
 
 	@Column(unique = true)
 	private String name;
-	
-	@ManyToOne(cascade=CascadeType.ALL)
+
+	@ManyToOne(cascade = CascadeType.ALL)
 	private IngredientType ingredientType;
 
 	private double price;
@@ -84,6 +84,5 @@ public class Ingredient {
 	public void setChangeTime(Date changeTime) {
 		this.changeTime = changeTime;
 	}
-	
-	
+
 }

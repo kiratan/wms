@@ -15,36 +15,36 @@ public class RecordService {
 	@Autowired
 	RecordDao recordDao;
 
-	public List<Record> findAll ( ) {
+	public List<Record> findAll() {
 
 		return recordDao.findAll();
 	}
 
-	public boolean save (Record record) {
+	public boolean save(Record record) {
 
 		try {
-			recordDao.save( record );
-		} catch ( Exception e ) {
+			recordDao.save(record);
+		} catch (Exception e) {
 			return false;
 		}
-		
+
 		return true;
 	}
 
-	public boolean delete (long id) {
+	public boolean delete(long id) {
 
 		try {
-			recordDao.delete( id );
-		} catch ( Exception e ) {
+			recordDao.delete(id);
+		} catch (Exception e) {
 			return false;
 		}
-		
+
 		return true;
 	}
 
-	public Record findById (long id) {
+	public Record findById(long id) {
 
-		return recordDao.findOne( id );
+		return recordDao.findOne(id);
 	}
-	
+
 }

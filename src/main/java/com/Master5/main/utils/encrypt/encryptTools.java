@@ -38,7 +38,7 @@ public class encryptTools {
 
 	/**
 	 * 产生随机字符串
-	 * */
+	 */
 	public static String getRandomString(int length) {
 
 		char[] words = ("ABCDEF").toCharArray();
@@ -92,7 +92,7 @@ public class encryptTools {
 	}
 
 	public static int[] getDecodeStr(String str) {
-		
+
 		str = delUpperCase(str);
 
 		int seedLength = 1;

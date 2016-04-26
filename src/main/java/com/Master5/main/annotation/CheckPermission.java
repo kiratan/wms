@@ -12,13 +12,12 @@ import com.Master5.main.utils.constant.Key;
 @Documented
 @Inherited
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.METHOD})
+@Target({ ElementType.METHOD })
 public @interface CheckPermission {
-	
-	public String name();
-	
-    public String method();
-    
-    public int state() default Key.STATE_DEFAULT_USER;
-}
 
+	public String name();
+
+	public String method();
+
+	public int state() default Key.STATE_DEFAULT_USER;
+}

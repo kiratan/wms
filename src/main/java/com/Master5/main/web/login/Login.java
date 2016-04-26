@@ -72,16 +72,16 @@ public class Login {
 	@RequestMapping(value = "loging", method = RequestMethod.POST)
 	public String login(@ModelAttribute User loginUser, HttpServletRequest request,
 			RedirectAttributes redirectAttributes) {
-		
+
 		List<String> msgList = new ArrayList<String>();
-		
-		loginUser.setPass( MD5.getMD5Pass( loginUser.getPass() ));
+
+		loginUser.setPass(MD5.getMD5Pass(loginUser.getPass()));
 
 		// subject理解成权限对象。类似user
 		Subject subject = SecurityUtils.getSubject();
 		Session session = subject.getSession();
 		// 创建用户名和密码的令牌
-		UsernamePasswordToken token = new UsernamePasswordToken(loginUser.getName(), loginUser.getPass() );
+		UsernamePasswordToken token = new UsernamePasswordToken(loginUser.getName(), loginUser.getPass());
 		// 记录该令牌，如果不记录则类似购物车功能不能使用。
 		token.setRememberMe(true);
 		subject.getPrincipal();
@@ -94,7 +94,7 @@ public class Login {
 				loginUser.setIp(IPTools.getClientIp(request));
 				session.setAttribute(Key.LOGINED, loginUser);
 				redirectAttributes.addFlashAttribute(MsgKey.msg, msgList);
-				logger.info("登陆成功："+loginUser.getNickName());
+				logger.info("登陆成功：" + loginUser.getNickName());
 				return "redirect:/user/info";
 			}
 		} catch (UnknownAccountException ex) {
@@ -132,7 +132,7 @@ public class Login {
 		role.setState(Key.STATE_DEFAULT_ADMIN);
 		Set<Role> roles = new HashSet<Role>();
 		roles.add(roleService.save(role));
-		User user = new User(Key.ROLE_DEFAULT_ADMIN, Key.ADMIN_DEFAULT_NAME, MD5.getMD5Pass( Key.ADMIN_DEFAULT_PASS ),
+		User user = new User(Key.ROLE_DEFAULT_ADMIN, Key.ADMIN_DEFAULT_NAME, MD5.getMD5Pass(Key.ADMIN_DEFAULT_PASS),
 				Key.ADMIN_DEFAULT_EMAIL, Key.SEX_MAN);
 		user.setRoles(roles);
 		user.setState(Key.STATE_DEFAULT_ADMIN);
@@ -150,20 +150,20 @@ public class Login {
 		redirectAttributes.addFlashAttribute(Key.msg, msgList);
 		return "redirect:/login/list";
 	}
-	
+
 	@RequiresGuest
 	@RequestMapping(value = "aa")
 	public String getLngLats() {
 
 		return "/login/map";
 	}
-	
+
 	@RequestMapping("/getLngLat")
 	@ResponseBody
-	public List<Map<String, Object>> getLngLat(){
-		Map<String,Object> conditonMap=new HashMap<String,Object>();
-		List<Map<String,Object>> resList= new ArrayList<Map<String,Object>>();
-		List<String> tempList=new ArrayList<String>();
+	public List<Map<String, Object>> getLngLat() {
+		Map<String, Object> conditonMap = new HashMap<String, Object>();
+		List<Map<String, Object>> resList = new ArrayList<Map<String, Object>>();
+		List<String> tempList = new ArrayList<String>();
 		tempList.add("113.67566,34.753844");
 		tempList.add("113.675381,34.75391");
 		tempList.add("113.675306,34.75372");
@@ -171,9 +171,9 @@ public class Login {
 		conditonMap.put("LngLat", tempList);
 		conditonMap.put("center", "113.675424,34.7538");
 		resList.add(conditonMap);
-		
-		tempList=new ArrayList<String>();
-		conditonMap=new HashMap<String,Object>();
+
+		tempList = new ArrayList<String>();
+		conditonMap = new HashMap<String, Object>();
 		tempList.add("113.721805,34.769826");
 		tempList.add("113.721386,34.769429");
 		tempList.add("113.721982,34.768962");
@@ -181,9 +181,9 @@ public class Login {
 		conditonMap.put("LngLat", tempList);
 		conditonMap.put("center", "113.721934,34.769366");
 		resList.add(conditonMap);
-		
-		tempList=new ArrayList<String>();
-		conditonMap=new HashMap<String,Object>();
+
+		tempList = new ArrayList<String>();
+		conditonMap = new HashMap<String, Object>();
 		tempList.add("113.722507,34.769275");
 		tempList.add("113.722094,34.768923");
 		tempList.add("113.722792,34.768389");
@@ -191,9 +191,9 @@ public class Login {
 		conditonMap.put("LngLat", tempList);
 		conditonMap.put("center", "113.722674,34.768797");
 		resList.add(conditonMap);
-		
-		tempList=new ArrayList<String>();
-		conditonMap=new HashMap<String,Object>();
+
+		tempList = new ArrayList<String>();
+		conditonMap = new HashMap<String, Object>();
 		tempList.add("113.729953,34.777006");
 		tempList.add("113.729326,34.777196");
 		tempList.add("113.729256,34.777006");
@@ -201,10 +201,9 @@ public class Login {
 		conditonMap.put("LngLat", tempList);
 		conditonMap.put("center", "113.729508,34.777037");
 		resList.add(conditonMap);
-		
-		
-		tempList=new ArrayList<String>();
-		conditonMap=new HashMap<String,Object>();
+
+		tempList = new ArrayList<String>();
+		conditonMap = new HashMap<String, Object>();
 		tempList.add("113.730935,34.776874");
 		tempList.add("113.73064,34.77702");
 		tempList.add("113.730388,34.776641");
@@ -212,9 +211,9 @@ public class Login {
 		conditonMap.put("LngLat", tempList);
 		conditonMap.put("center", "113.730608,34.776729");
 		resList.add(conditonMap);
-		
-		tempList=new ArrayList<String>();
-		conditonMap=new HashMap<String,Object>();
+
+		tempList = new ArrayList<String>();
+		conditonMap = new HashMap<String, Object>();
 		tempList.add("113.732571,34.769414");
 		tempList.add("113.731713,34.768691");
 		tempList.add("113.73218,34.76822");
@@ -222,9 +221,9 @@ public class Login {
 		conditonMap.put("LngLat", tempList);
 		conditonMap.put("center", "113.732469,34.768819");
 		resList.add(conditonMap);
-		
-		tempList=new ArrayList<String>();
-		conditonMap=new HashMap<String,Object>();
+
+		tempList = new ArrayList<String>();
+		conditonMap = new HashMap<String, Object>();
 		tempList.add("113.7316,34.768497");
 		tempList.add("113.73079,34.768057");
 		tempList.add("113.731187,34.767621");
@@ -232,10 +231,9 @@ public class Login {
 		conditonMap.put("LngLat", tempList);
 		conditonMap.put("center", "113.731252,34.767982");
 		resList.add(conditonMap);
-		
-		
-		tempList=new ArrayList<String>();
-		conditonMap=new HashMap<String,Object>();
+
+		tempList = new ArrayList<String>();
+		conditonMap = new HashMap<String, Object>();
 		tempList.add("113.723634,34.777945");
 		tempList.add("113.722459,34.777526");
 		tempList.add("113.722819,34.777125");
@@ -243,10 +241,9 @@ public class Login {
 		conditonMap.put("LngLat", tempList);
 		conditonMap.put("center", "113.722926,34.777376");
 		resList.add(conditonMap);
-		
-		
-		tempList=new ArrayList<String>();
-		conditonMap=new HashMap<String,Object>();
+
+		tempList = new ArrayList<String>();
+		conditonMap = new HashMap<String, Object>();
 		tempList.add("113.722036,34.777174");
 		tempList.add("113.721537,34.776843");
 		tempList.add("113.721998,34.77653");
@@ -255,8 +252,8 @@ public class Login {
 		conditonMap.put("center", "113.721966,34.776804");
 		resList.add(conditonMap);
 
-		tempList=new ArrayList<String>();
-		conditonMap=new HashMap<String,Object>();
+		tempList = new ArrayList<String>();
+		conditonMap = new HashMap<String, Object>();
 		tempList.add("113.727899,34.771119");
 		tempList.add("113.727277,34.771393");
 		tempList.add("113.726665,34.771093");
@@ -268,21 +265,21 @@ public class Login {
 		conditonMap.put("LngLat", tempList);
 		conditonMap.put("center", "113.727566,34.770802");
 		resList.add(conditonMap);
-		
-//		tempList=new ArrayList<String>();
-//		conditonMap=new HashMap<String,Object>();
-//		tempList.add("113.646268,34.755067");
-//		tempList.add("113.645989,34.755058");
-//		tempList.add("113.645834,34.75493");
-//		tempList.add("113.645635,34.754864");
-//		tempList.add("113.645501,34.754736");
-//		tempList.add("113.645501,34.754512");
-//		tempList.add("113.646113,34.754503");
-//		tempList.add("113.646258,34.755049");
-//		conditonMap.put("LngLat", tempList);
-//		conditonMap.put("center", "113.64578,34.754776");
-//		resList.add(conditonMap);
-		return  resList;
+
+		// tempList=new ArrayList<String>();
+		// conditonMap=new HashMap<String,Object>();
+		// tempList.add("113.646268,34.755067");
+		// tempList.add("113.645989,34.755058");
+		// tempList.add("113.645834,34.75493");
+		// tempList.add("113.645635,34.754864");
+		// tempList.add("113.645501,34.754736");
+		// tempList.add("113.645501,34.754512");
+		// tempList.add("113.646113,34.754503");
+		// tempList.add("113.646258,34.755049");
+		// conditonMap.put("LngLat", tempList);
+		// conditonMap.put("center", "113.64578,34.754776");
+		// resList.add(conditonMap);
+		return resList;
 	}
 
 }

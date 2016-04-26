@@ -29,6 +29,7 @@ public final class Qrcode {
 
 	private Qrcode() {
 	}
+
 	/**
 	 * 对字符串进行编码 并输出到指定路径
 	 * 
@@ -36,11 +37,11 @@ public final class Qrcode {
 	 *            需要转换成二维码 字符串
 	 * @param file
 	 *            输出二维码图片的file对象
-	 * @return 
+	 * @return
 	 */
 	public static BufferedImage enCode(String content) {
 		try {
-			
+
 			MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
 			Map hints = new HashMap();
 			// 二维码编码格式
@@ -52,10 +53,9 @@ public final class Qrcode {
 			 * 共有四个级别L M Q H， L 7% M 15% Q 25% H 30% 详情参照变量
 			 */
 			hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
-			BitMatrix bitMatrix = multiFormatWriter.encode(content,
-					BarcodeFormat.QR_CODE, 400, 400, hints);
-			//MatrixToImageWriter.writeToFile(bitMatrix, "png", file);
-			return Qrcode. toBufferedImage(bitMatrix);
+			BitMatrix bitMatrix = multiFormatWriter.encode(content, BarcodeFormat.QR_CODE, 400, 400, hints);
+			// MatrixToImageWriter.writeToFile(bitMatrix, "png", file);
+			return Qrcode.toBufferedImage(bitMatrix);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -83,7 +83,7 @@ public final class Qrcode {
 			// 二维码边界空白大小 ，如：1、2、3、4 默认好像是4
 			hints.put(EncodeHintType.MARGIN, 1);
 			// 指定纠错等级
-			hints.put(EncodeHintType.ERROR_CORRECTION,  ErrorCorrectionLevel.L);
+			hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
 			Result result = formatReader.decode(binaryBitmap, hints);
 
 			System.out.println("result = " + result.toString());
@@ -94,11 +94,11 @@ public final class Qrcode {
 			e.printStackTrace();
 		}
 	}
+
 	/**
 	 * 二维码添加自定义logo（关键部分）
 	 */
-	public static void overLogo(BufferedImage image, String imgSavePath,
-			String logoPath, String formate) {
+	public static void overLogo(BufferedImage image, String imgSavePath, String logoPath, String formate) {
 		try {
 			BufferedImage logo = ImageIO.read(new File(logoPath));
 			Graphics2D g = image.createGraphics();
@@ -119,8 +119,7 @@ public final class Qrcode {
 	public static BufferedImage toBufferedImage(BitMatrix matrix) {
 		int width = matrix.getWidth();
 		int height = matrix.getHeight();
-		BufferedImage image = new BufferedImage(width, height,
-				BufferedImage.TYPE_INT_RGB);
+		BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 		for (int x = 0; x < width; x++) {
 			for (int y = 0; y < height; y++) {
 				image.setRGB(x, y, matrix.get(x, y) ? COLOR : BACKCOLOR);
@@ -129,21 +128,17 @@ public final class Qrcode {
 		return image;
 	}
 
-	public static void writeToFile(BitMatrix matrix, String format, File file)
-			throws IOException {
+	public static void writeToFile(BitMatrix matrix, String format, File file) throws IOException {
 		BufferedImage image = toBufferedImage(matrix);
 		if (!ImageIO.write(image, format, file)) {
-			throw new IOException("Could not write an image of format "
-					+ format + " to " + file);
+			throw new IOException("Could not write an image of format " + format + " to " + file);
 		}
 	}
 
-	public static void writeToStream(BitMatrix matrix, String format,
-			OutputStream stream) throws IOException {
+	public static void writeToStream(BitMatrix matrix, String format, OutputStream stream) throws IOException {
 		BufferedImage image = toBufferedImage(matrix);
 		if (!ImageIO.write(image, format, stream)) {
-			throw new IOException("Could not write an image of format "
-					+ format);
+			throw new IOException("Could not write an image of format " + format);
 		}
 	}
 

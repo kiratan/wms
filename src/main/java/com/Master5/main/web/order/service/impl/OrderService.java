@@ -8,7 +8,7 @@ import com.Master5.main.web.order.entry.Orders;
 import com.Master5.main.web.order.service.IOrderService;
 
 @Service
-public class OrderService implements IOrderService{
+public class OrderService implements IOrderService {
 
 	@Override
 	public List<Orders> query() {

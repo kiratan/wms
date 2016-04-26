@@ -60,6 +60,5 @@ public class Supplier {
 	public void setNumber(String number) {
 		this.number = number;
 	}
-	
-	
+
 }

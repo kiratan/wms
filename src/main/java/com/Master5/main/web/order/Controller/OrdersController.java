@@ -15,7 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.Master5.main.utils.constant.MsgKey;
 import com.Master5.main.web.order.entry.IngredientType;
 import com.Master5.main.web.order.entry.Orders;
-import com.Master5.main.web.order.service.IOrderService;
+import com.Master5.main.web.order.service.OrderService;
 
 import sun.misc.Request;
 
@@ -24,7 +24,7 @@ import sun.misc.Request;
 public class OrdersController {
 
 	@Autowired
-	IOrderService orderService;
+	OrderService orderService;
 
 	@RequestMapping(value = { "", "list" })
 	public String listOrder(Model model) {
@@ -36,6 +36,7 @@ public class OrdersController {
 		return "order/list";
 	}
 
+	
 	@RequestMapping(value = "listIngredientType")
 	public String listIngredientType(Model model) {
 
@@ -57,6 +58,7 @@ public class OrdersController {
 		return "redirect:listIngredientType";
 	}
 
+	//http://localhost:8080/WMS/order/delIngredientType/1
 	@RequestMapping(value = "delIngredientType/{id}")
 	public String delIngredientType(@PathVariable int id) {
 		orderService.deleteIngredientType(id);

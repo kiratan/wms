@@ -7,14 +7,19 @@ import org.springframework.stereotype.Service;
 
 import com.Master5.main.web.order.dao.IngredientTypeDao;
 import com.Master5.main.web.order.dao.OrderDao;
+import com.Master5.main.web.order.dao.SupplierDao;
 import com.Master5.main.web.order.entry.IngredientType;
 import com.Master5.main.web.order.entry.Orders;
+import com.Master5.main.web.order.entry.Supplier;
 
 @Service
 public class OrderService   {
 
 	@Autowired
 	OrderDao orderDao;
+	
+	@Autowired
+	SupplierDao supplierDao;
 
 	@Autowired
 	IngredientTypeDao ingredientTypeDao;
@@ -62,6 +67,19 @@ public class OrderService   {
 
 	public boolean deleteIngredientType(int id) {
 		ingredientTypeDao.delete(id);
+		return true;
+	}
+	
+	public List<Supplier> querySupplier(){
+		return supplierDao.findAll();
+	}
+	
+	public Supplier addSupplier(Supplier bean) {
+		return supplierDao.saveAndFlush(bean);
+	}
+
+	public boolean deleteSupplier(int id) {
+		supplierDao.delete(id);
 		return true;
 	}
 

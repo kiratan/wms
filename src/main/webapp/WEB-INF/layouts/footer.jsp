@@ -19,7 +19,7 @@
 				<a class="navbar-brand active" href="#"> 
 			<%-- 	<img class="img-thumbnail" src="${ctx}/resources/img/logo.png"> --%>
 			<span class="glyphicon glyphicon-fire" aria-hidden="true" style="font-size: 50px;"></span>
-				</a> <a class="navbar-brand active" href="${ctx}/menu/list">仓储管理系统</a>
+				</a> <a class="navbar-brand active" href="${ctx}/menu/list">食材管理系统</a>
 			</div>
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
@@ -65,6 +65,8 @@
 							<ul class="dropdown-menu">
 								<li><a href="${ctx}/order/list">订单列表</a></li>
 								<li><a href="${ctx}/order/listIngredientType">商品类型列表</a></li>
+								<li><a href="${ctx}/order/listSupplier">供应商列表</a></li>
+								
 							</ul></li>
 					</ul>
 

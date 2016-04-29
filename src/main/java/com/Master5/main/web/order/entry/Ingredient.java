@@ -28,7 +28,7 @@ public class Ingredient {
 	@Column(unique = true)
 	private String name;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	private IngredientType ingredientType;
 
 	private double price;
@@ -83,6 +83,12 @@ public class Ingredient {
 
 	public void setChangeTime(Date changeTime) {
 		this.changeTime = changeTime;
+	}
+
+	@Override
+	public String toString() {
+		return "Ingredient [id=" + id + ", name=" + name + ", ingredientType=" + ingredientType + ", price=" + price
+				+ ", unit=" + unit + ", changeTime=" + changeTime + "]";
 	}
 
 }

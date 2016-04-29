@@ -3,20 +3,24 @@ package com.Master5.main.web.order.Controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.jpa.JpaSystemException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.Master5.main.utils.constant.MsgKey;
+import com.Master5.main.web.order.entry.Ingredient;
 import com.Master5.main.web.order.entry.IngredientType;
 import com.Master5.main.web.order.entry.Orders;
 import com.Master5.main.web.order.entry.Supplier;
 import com.Master5.main.web.order.service.OrderService;
-
+import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
 
 @Controller
 @RequestMapping(value = "order")
@@ -24,7 +28,6 @@ public class OrdersController {
 
 	@Autowired
 	OrderService orderService;
-	
 
 	@RequestMapping(value = { "", "list" })
 	public String listOrder(Model model) {
@@ -36,7 +39,13 @@ public class OrdersController {
 		return "order/list";
 	}
 
-	
+	@ResponseBody
+	@RequestMapping(value = "listIngredientTypeJson", method = RequestMethod.POST)
+	public List<IngredientType> listIngredientTypeJson(Model model) {
+		List<IngredientType> list = orderService.queryIngredientType();
+		return list;
+	}
+
 	@RequestMapping(value = "listIngredientType")
 	public String listIngredientType(Model model) {
 
@@ -58,13 +67,19 @@ public class OrdersController {
 		return "redirect:listIngredientType";
 	}
 
-	//http://localhost:8080/WMS/order/delIngredientType/1
+	// http://localhost:8080/WMS/order/delIngredientType/1
 	@RequestMapping(value = "delIngredientType/{id}")
-	public String delIngredientType(@PathVariable int id) {
-		orderService.deleteIngredientType(id);
+	public String delIngredientType(@PathVariable int id, Model model) {
+		try {
+			orderService.deleteIngredientType(id);
+		} catch (JpaSystemException e) {
+			List<String> list = new ArrayList<>();
+			list.add("删除失败，有相关联的数据未删除。");
+			model.addAttribute(MsgKey.msg, list);
+		}
 		return "redirect:../listIngredientType";
 	}
-	
+
 	@RequestMapping(value = "listSupplier")
 	public String listSupplier(Model model) {
 
@@ -74,7 +89,7 @@ public class OrdersController {
 
 		return "order/listSupplier";
 	}
-	
+
 	@RequestMapping(value = "addSupplier", method = RequestMethod.POST)
 	public String addSupplier(Supplier type, RedirectAttributes redirectAttributes) {
 
@@ -85,11 +100,38 @@ public class OrdersController {
 		redirectAttributes.addFlashAttribute(MsgKey.msg, msgList);
 		return "redirect:listSupplier";
 	}
-	
+
 	@RequestMapping(value = "delSupplier/{id}")
 	public String delSupplier(@PathVariable int id) {
 		orderService.deleteSupplier(id);
 		return "redirect:../listSupplier";
+	}
+
+	@RequestMapping(value = "listIngredient")
+	public String listIngredient(Model model) {
+
+		List<Ingredient> list = orderService.queryIngredient();
+
+		model.addAttribute("list", list);
+
+		return "order/listIngredient";
+	}
+
+	@RequestMapping(value = "addIngredient", method = RequestMethod.POST)
+	public String addIngredient(Ingredient ingredient, RedirectAttributes redirectAttributes) {
+		orderService.addIngredient(ingredient);
+		return "redirect:listIngredient";
+	}
+
+	@RequestMapping(value = "delIngredient/{id}")
+	public String delIngredient(@PathVariable int id, Model model) {
+		try {
+			orderService.deleteIngredient(id);
+		} catch (JpaSystemException e) {
+			e.printStackTrace();
+			model.addAttribute(MsgKey.msg, "有相关关联数据不可删除");
+		}
+		return "redirect:../listIngredient";
 	}
 
 }

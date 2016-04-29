@@ -1,7 +1,9 @@
 package com.Master5.main.web.order.service;
 
+import java.util.Calendar;
 import java.util.List;
 
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,7 @@ import com.Master5.main.web.order.entry.Ingredient;
 import com.Master5.main.web.order.entry.IngredientType;
 import com.Master5.main.web.order.entry.Orders;
 import com.Master5.main.web.order.entry.Supplier;
+import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
 
 @Service
 public class OrderService   {
@@ -41,7 +44,7 @@ public class OrderService   {
 		return ingredientTypeDao.saveAndFlush(bean);
 	}
 
-	public boolean deleteIngredientType(int id) {
+	public boolean deleteIngredientType(int id) throws ConstraintViolationException{
 		ingredientTypeDao.delete(id);
 		return true;
 	}
@@ -64,6 +67,7 @@ public class OrderService   {
 	}
 	
 	public Ingredient addIngredient(Ingredient bean) {
+		bean.setChangeTime(Calendar.getInstance().getTime());
 		return ingredientDao.saveAndFlush(bean);
 	}
 

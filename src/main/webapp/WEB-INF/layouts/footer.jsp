@@ -66,6 +66,7 @@
 								<li><a href="${ctx}/order/list">订单列表</a></li>
 								<li><a href="${ctx}/order/listIngredientType">商品类型列表</a></li>
 								<li><a href="${ctx}/order/listSupplier">供应商列表</a></li>
+								<li><a href="${ctx}/order/listIngredient">产品列表</a></li>
 								
 							</ul></li>
 					</ul>

@@ -11,6 +11,27 @@
 <title>主页</title>
 
 <script type="text/javascript">
+
+$(document).ready(function(){
+	
+	$("#add").click(function(){
+		
+		$.ajax({
+			url:"../order/listIngredientTypeJson",
+			type : "post",
+			data : "",
+			dataType : 'json',
+			success:function(data,status){
+				var select=$("#ingredientType").empty();
+				$.each(data,function(){
+					select.append('<option value="'+this.id+'">'+this.name+'</option>');
+				});
+			}
+		});
+		
+	});
+	
+});
 	
 </script>
 </head>
@@ -26,7 +47,10 @@
 				<tr>
 				<th>#</th>
 	            <th>名称</th>
-	            <th>操作</th>
+	            <th>类型</th>
+	            <th>价格</th>
+	            <th>单位</th>
+	            <th>修改时间</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -35,8 +59,12 @@
 					<tr class="table-bordered">
 					  	<td class="table-bordered id">${list.id}</td>
 			            <td class="table-bordered name">${list.name}</td>
+			             <td class="table-bordered id">${list.ingredientType.name}</td>
+			            <td class="table-bordered name">${list.price}</td>
+			             <td class="table-bordered id">${list.unit}</td>
+			            <td class="table-bordered name">${list.changeTime}</td>
 						<td class="danger table-bordered">
-						<a href="${ctx}/order/delIngredientType/${list.id}"> <span class="glyphicon glyphicon-trash"> </span> </a> | 
+						<a href="${ctx}/order/delIngredient/${list.id}"> <span class="glyphicon glyphicon-trash"> </span> </a> | 
 			            <a class="update" data-toggle="modal" data-target="#myModal"  href="#">
 			             	<span class="glyphicon glyphicon-pencil"></span> 
 			            </a>
@@ -58,12 +86,25 @@
 					</button>
 					<h4 class="modal-title" id="myModalLabel">添加</h4>
 				</div>
-				   <form id="addForm" role="form" action="${ctx}/order/addIngredientType" method="post">
+				   <form id="addForm" role="form" action="${ctx}/order/addIngredient" method="post">
 					<div class="modal-body" >
 						<!-- 弹框内容  -->
-					 	<div class="input-group">
-						 <span class="input-group-addon alert-info"> 名称</span>
-						<input type="text" class="form-control" name="name" placeholder="请输入">
+						<div class="form-group form-horizontal">
+						   <label for="name">名称</label>
+						   <input type="text" class="form-control" name="name" id="name" placeholder="">
+						</div>
+						<div class="form-group">
+						   <label for="ingredientType">类型</label>
+							<select class="form-control" name="ingredientType.id"  id="ingredientType" >
+							</select>
+						</div>
+						<div class="form-group">
+						   <label for="price">价格</label>
+						   <input type="number" class="form-control" step="0.1" name="price" id="price" placeholder="">
+						</div>
+						<div class="form-group">
+						   <label for="unit">单位</label>
+						   <input type="text" class="form-control" name="unit" id="unit" placeholder="">
 						</div>
 						<!-- 弹框内容  -->
 					</div>

@@ -5,9 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.Master5.main.web.order.dao.IngredientDao;
 import com.Master5.main.web.order.dao.IngredientTypeDao;
 import com.Master5.main.web.order.dao.OrderDao;
 import com.Master5.main.web.order.dao.SupplierDao;
+import com.Master5.main.web.order.entry.Ingredient;
 import com.Master5.main.web.order.entry.IngredientType;
 import com.Master5.main.web.order.entry.Orders;
 import com.Master5.main.web.order.entry.Supplier;
@@ -20,41 +22,15 @@ public class OrderService   {
 	
 	@Autowired
 	SupplierDao supplierDao;
+	
+	@Autowired
+	IngredientDao ingredientDao;
 
 	@Autowired
 	IngredientTypeDao ingredientTypeDao;
 
 	public List<Orders> query() {
 		return orderDao.findAll();
-	}
-
-	public List<Orders> query(Orders orders) {
-		return null;
-	}
-
-	public Orders query(int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public Orders add(Orders orders) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public Orders modify(Orders orders) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public boolean delete(Orders orders) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public boolean delete(int id) {
-		// TODO Auto-generated method stub
-		return false;
 	}
 
 	public List<IngredientType> queryIngredientType() {
@@ -82,5 +58,20 @@ public class OrderService   {
 		supplierDao.delete(id);
 		return true;
 	}
+	
+	public List<Ingredient> queryIngredient(){
+		return ingredientDao.findAll();
+	}
+	
+	public Ingredient addIngredient(Ingredient bean) {
+		return ingredientDao.saveAndFlush(bean);
+	}
+
+	public boolean deleteIngredient(int id) {
+		ingredientDao.delete(id);
+		return true;
+	}
+	
+	
 
 }

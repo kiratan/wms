@@ -45,7 +45,7 @@
 				<sitemesh:body />
 			</div>
 		</div>
-		<%@ include file="/WEB-INF/layouts/footer.jsp"%>
+		<%-- <%@ include file="/WEB-INF/layouts/footer.jsp"%> --%>
 	</div>
  </body>
 </html>

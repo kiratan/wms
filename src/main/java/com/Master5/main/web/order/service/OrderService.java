@@ -32,10 +32,6 @@ public class OrderService   {
 	@Autowired
 	IngredientTypeDao ingredientTypeDao;
 
-	public List<Orders> query() {
-		return orderDao.findAll();
-	}
-
 	public List<IngredientType> queryIngredientType() {
 		return ingredientTypeDao.findAll();
 	}
@@ -77,5 +73,21 @@ public class OrderService   {
 	}
 	
 	
+	public List<Orders> queryOrders(){
+		return orderDao.findAll();
+	}
+	
+	public Orders addOrders(Orders bean) {
+		return orderDao.saveAndFlush(bean);
+	}
 
+	public boolean deleteOrders(int id) {
+		orderDao.delete(id);
+		return true;
+	}
+
+	public Ingredient queryIngredient(int id) {
+		return ingredientDao.findOne(id);
+	}
+	
 }

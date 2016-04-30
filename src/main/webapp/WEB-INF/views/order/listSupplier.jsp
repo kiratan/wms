@@ -20,6 +20,8 @@
 		<button id="add" class="btn btn-primary btn" data-toggle="modal"
 			data-target="#myModal">添加</button>
 	</div>
+	
+	<hr/>
 	<div class="table-responsive col-md-offset-1 col-sm-10 ">
 		<table class="table table-hover success center">
 			<thead>
@@ -28,6 +30,7 @@
 					<th>名称</th>
 					<th>地址</th>
 					<th>电话</th>
+					<th>操作</th>
 				</tr>
 			</thead>
 			<tbody>

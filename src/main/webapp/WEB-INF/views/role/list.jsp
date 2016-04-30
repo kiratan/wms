@@ -77,7 +77,7 @@
 						<!--权限id -->
 						<input type="hidden" id=perIds name="perIds">
 						<div class="input-group">
-							<span class="input-group-addon alert-info">角色名称</span>
+							<span class="input-group-addon">角色名称</span>
 							 <input type="text" class="form-control " id="name" name="name" placeholder="角色名称"> 
 								 <span class="input-group-addon alert-warning"></span>						
 						</div>
@@ -95,11 +95,11 @@
 											</div>
 										</div>
 										<div id="" class="panel-collapse collapse">
-											<div class="panel-body alert-warning">
+											<div class="panel-body">
 												<!-- 内容 -->
 												<div class="btn-group " data-toggle="buttons">
 												<%-- 	<c:forEach items="${map.value}" var="per"> --%>
-														<label class="btn alert-info perlable" id=""> </label>
+														<label class="btn perlable" id=""> </label>
 													<%-- </c:forEach> --%>
 												</div>
 												<!-- 内容 -->

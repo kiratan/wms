@@ -16,16 +16,16 @@
 					<span class="icon-bar"></span> 
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand active" href="#"> 
-			<%-- 	<img class="img-thumbnail" src="${ctx}/resources/img/logo.png"> --%>
+<%-- 				<a class="navbar-brand active" href="#"> 
+				<img class="img-thumbnail" src="${ctx}/resources/img/logo.png">
 			<span class="glyphicon glyphicon-fire" aria-hidden="true" style="font-size: 50px;"></span>
-				</a> <a class="navbar-brand active" href="${ctx}/menu/list">食材管理系统</a>
+				</a> --%>
+				 <a class="navbar-brand active" href="${ctx}/menu/list">食材管理系统</a>
 			</div>
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse"
-				id="bs-example-navbar-collapse-1"
-				style="padding-top: 20px; padding-bottom: 20px">
+				id="bs-example-navbar-collapse-1" >
 				<ul class="nav navbar-nav">
 					<li>&nbsp;</li>
 					<!-- 把手机的导航栏菜单撑开 -->
@@ -58,20 +58,6 @@
 				<shiro:authenticated>
 
 					<ul class="nav navbar-nav navbar-right">
-						<li class="dropdown"><a href="#" class="dropdown-toggle"
-							data-toggle="dropdown"> <span class="glyphicon glyphicon-cog">
-							</span>&nbsp;&nbsp;订单管理 <b class="caret"></b>&nbsp;&nbsp;&nbsp;&nbsp;
-						</a>
-							<ul class="dropdown-menu">
-								<li><a href="${ctx}/order/list">订单列表</a></li>
-								<li><a href="${ctx}/order/listIngredientType">商品类型列表</a></li>
-								<li><a href="${ctx}/order/listSupplier">供应商列表</a></li>
-								<li><a href="${ctx}/order/listIngredient">产品列表</a></li>
-								
-							</ul></li>
-					</ul>
-
-					<ul class="nav navbar-nav navbar-right">
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown"> 
 							<span class="glyphicon glyphicon-cog"> </span>&nbsp;&nbsp;管理员工具 
@@ -92,8 +78,21 @@
 								</shiro:hasPermission>
 							</ul></li>
 					</ul>
-
+					
 					<ul class="nav navbar-nav navbar-right">
+						<li class="dropdown"><a href="#" class="dropdown-toggle"
+							data-toggle="dropdown"> <span class="glyphicon glyphicon-cog">
+							</span>&nbsp;&nbsp;订单管理 <b class="caret"></b>&nbsp;&nbsp;&nbsp;&nbsp;
+						</a>
+							<ul class="dropdown-menu">
+								<li><a href="${ctx}/order/listOrders">订单列表</a></li>
+								<li><a href="${ctx}/order/listIngredientType">商品类型列表</a></li>
+								<li><a href="${ctx}/order/listSupplier">供应商列表</a></li>
+								<li><a href="${ctx}/order/listIngredient">产品列表</a></li>
+							</ul></li>
+					</ul>
+
+					<%-- <ul class="nav navbar-nav navbar-right">
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 								<span class="glyphicon glyphicon-cog"></span>
@@ -105,7 +104,7 @@
 									<li><a href="${ctx}/play/qrcode/menu">二维码</a></li>
 								</shiro:hasPermission>
 							</ul></li>
-					</ul>
+					</ul> --%>
 				</shiro:authenticated>
 				<c:if test="${msg!=null}">
 					<ul class="nav navbar-nav navbar-right">
@@ -114,9 +113,9 @@
 								class="glyphicon glyphicon-envelope"></span>消息 <span
 								class="badge">${msg.size()}</span>
 						</a>
-							<ul class="dropdown-menu">
+							<ul class="dropdown-menu list-group">
 								<c:forEach items="${msg}" var="msgStr">
-									<li class="alert-info small"><a href="#">${msgStr}</a></li>
+									<li class="list-group-item"><a href="#">${msgStr}</a></li>
 								</c:forEach>
 							</ul></li>
 					</ul>

@@ -42,7 +42,7 @@ function addRoleBtn() {// 异步加载权限 并增加按钮到面板
 					var map = jQuery.parseJSON(data);
 					var roleBtns = $(".btn-group.roles") .empty();
 					for ( var role in map) {// 循环权限列表 // 并添加权限按钮到页面
-						roleBtns .append("<label class='btn alert-info roleIds' id='" + role + "'> " + map[role] + "</label>");
+						roleBtns .append("<label class='btn roleIds' id='" + role + "'> " + map[role] + "</label>");
 					}
 
 				}
@@ -56,7 +56,7 @@ function addRoleBtn() {// 异步加载权限 并增加按钮到面板
 
 $("#enter").click(function() {
 	var roleIds = "";
-	$(".btn.alert-info.roleIds.active").each(function() {
+	$(".btn.roleIds.active").each(function() {
 		roleIds += $(this).attr('id') + ",";
 	});
 	roleIds = roleIds.substring(0, roleIds.length - 1);

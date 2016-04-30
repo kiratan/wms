@@ -59,13 +59,13 @@
       <!-- 弹框内容  -->
       
       		<div class="input-group">
-			<span class="input-group-addon alert-info">权限名称</span>
+			<span class="input-group-addon">权限名称</span>
 			<input type="text" class="form-control "  id="name" name="name"  placeholder="权限名称">
-			<span class="input-group-addon alert-warning"></span>
+			<span class="input-group-addon"></span>
 			</div>
 			<br />
 			<div class="input-group">
-		<span class="input-group-addon alert-info">操作名称</span>
+		<span class="input-group-addon">操作名称</span>
 		<input type="text"  class="form-control" id="method" name="method" placeholder="操作名称" >
 		</div>
 		<br/>

@@ -62,7 +62,7 @@
 					<div class="modal-body" >
 						<!-- 弹框内容  -->
 					 	<div class="input-group">
-						 <span class="input-group-addon alert-info"> 名称</span>
+						 <span class="input-group-addon"> 名称</span>
 						<input type="text" class="form-control" name="name" placeholder="请输入">
 						</div>
 						<!-- 弹框内容  -->

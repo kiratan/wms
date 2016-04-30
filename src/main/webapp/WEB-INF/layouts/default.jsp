@@ -32,7 +32,7 @@
 	<!-- 导航条 -->
 <style type="text/css">
 	body { 
-			 padding-top: 150px;
+			 padding-top: 75px;
 		 }
 </style>
 </head>
@@ -42,7 +42,8 @@
 		<%@ include file="/WEB-INF/layouts/header.jsp"%>
 		<div class="row">
 			<%@ include file="/WEB-INF/layouts/left.jsp"%>
-			<div id="main" class="col-md-9">
+			<!-- <div id="main" class="col-md-9"> -->
+			<div id="main">
 				<sitemesh:body />
 			</div>
 		</div>

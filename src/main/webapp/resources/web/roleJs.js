@@ -2,7 +2,7 @@ $(document).ready(
 		$(function($) {
 			
 				$(".update").click(function(){
-					$(".input-group-addon.alert-warning") .hide();
+					$(".input-group-addon") .hide();
 					
 				addPerBtn();
 				
@@ -18,7 +18,7 @@ $(document).ready(
 
 			// 当用户点击添加的时候异步加载权限列表
 			$("#add").click(function() {
-				$(".input-group-addon.alert-warning") .hide();
+				$(".input-group-addon") .hide();
 				
 				$(":input#name").val("");
 				
@@ -58,7 +58,7 @@ $(document).ready(
 								perBtns.attr("id",method);//添加id
 								
 								for ( var i=0;i< perList.length;i++) {//循环权限列表 并添加权限按钮到页面
-									perBtnAdd.append("<label class='btn alert-info perlable' id='"+perList[i].id+"'> "+perList[i].name +"</label>");
+									perBtnAdd.append("<label class='btn perlable' id='"+perList[i].id+"'> "+perList[i].name +"</label>");
 								}
 
 								$("#autoDiv").append(div);//追加权限面板
@@ -75,19 +75,19 @@ $(document).ready(
 					function() {
 						
 						if ($("#name").val() == "") {
-							$(".input-group-addon.alert-warning") .empty().append("角色名称不能为空").show();
+							$(".input-group-addon") .empty().append("角色名称不能为空").show();
 							return false;
 						}
 						
 						var perIds = "";
-						$(".btn.alert-info.perlable.active").each(function() {
+						$(".btn.perlable.active").each(function() {
 							perIds += $(this).attr('id') + ",";
 						});
 						perIds = perIds.substring(0, perIds.length - 1);
 						$("#perIds").val(perIds);
 						
 						 if($("#perIds").val()==""){
-								$(".input-group-addon.alert-warning") .empty().append("没有选择任何权限").show();
+								$(".input-group-addon") .empty().append("没有选择任何权限").show();
 								return false;
 							}
 					});

@@ -79,7 +79,7 @@ $(document).ready(function(){
 	</div>
 	<hr/>
 	<div class="table-responsive">
-		<table class="table table-hover center table-condensed table-bordered">
+		<table class="table table-hover center table-condensed">
 			<thead>
 				<tr>
 				<th>#</th>

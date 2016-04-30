@@ -18,8 +18,9 @@
 		<button id="add" class="btn btn-primary btn" data-toggle="modal"
 			data-target="#myModal">添加角色</button>
 	</div>
-	<div class="table-responsive col-md-offset-1 col-sm-10 ">
-		<table class="table table-hover success center">
+	<hr/>
+	<div class="table-responsive">
+		<table class="table table-hover center">
 			<thead>
 				<tr>
 					<th>#</th>
@@ -32,21 +33,21 @@
 			<tbody>
 
 				<c:forEach items="${list}" var="role">
-					<tr class="table-bordered">
-						<td class="table-bordered id">${role.id}</td>
-						<td class="table-bordered name">${role.name}</td>
-						<td class="table-bordered">
-							<select multiple class="form-control" size="3">
+					<tr>
+						<td>${role.id}</td>
+						<td>${role.name}</td>
+						<td>
+							<select multiple class="form-control" size="5">
 									<c:forEach items="${role.permissions}" var="permission">
 										<option class="small">${permission.name}</option>
 									</c:forEach>
 							</select>
 						</td>
-						<td class="table-bordered">
+						<td>
 							${role.state}
 						</td>
 
-						<td class="danger table-bordered">
+						<td>
 						<a href="./del/${role.id}"> <span class="glyphicon glyphicon-trash"> </span> </a> | 
 						<a href="./lock/${role.id}"><span class="glyphicon glyphicon-lock"> </span></a> | 
 			             <a class="update" data-toggle="modal" data-target="#myModal"  href="#">

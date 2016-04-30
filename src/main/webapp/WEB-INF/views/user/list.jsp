@@ -21,8 +21,9 @@
 		<button id="add" class="btn btn-primary btn" data-toggle="modal"
 			data-target="#myModal">添加用户</button>
 	</div>
-	<div class="table-responsive col-md-offset-1 col-sm-10 ">
-		<table class="table table-hover success center">
+	<hr/>
+	<div class="table-responsive">
+		<table class="table table-hover center table-bordered">
 			<thead>
 				<tr>
 				<th>#</th>
@@ -40,22 +41,22 @@
 
 				<c:forEach items="${list}" var="list">
 					<tr class="table-bordered">
-						  	<td class="table-bordered id">${list.id}</td>
-				            <td class="table-bordered nickName">${list.nickName}</td>
-				             <td class="table-bordered sex">${list.sex}</td>
-				            <td class="table-bordered name">${list.name}</td>
-				            <td class="table-bordered pass">******</td>
-				            <td class="table-bordered email">${list.email}</td>
-				            <td class="table-bordered">${list.state}</td>
-							<td class="table-bordered">
-								<select multiple class="form-control" size="3">
+						  	<td>${list.id}</td>
+				            <td>${list.nickName}</td>
+				             <td>${list.sex}</td>
+				            <td>${list.name}</td>
+				            <td>******</td>
+				            <td>${list.email}</td>
+				            <td>${list.state}</td>
+							<td>
+								<select multiple class="form-control" size="5">
 										<c:forEach items="${list.roles}" var="role">
-											<option class="small">${role.name}</option>
+											<option>${role.name}</option>
 										</c:forEach>
 								</select>
 							</td>
 
-						<td class="danger table-bordered">
+						<td>
 						<a href="./del/${list.id}"> <span class="glyphicon glyphicon-trash"> </span> </a> | 
 						<a href="./lock/${list.id}"><span class="glyphicon glyphicon-lock"> </span></a> | 
 			             <a class="update" data-toggle="modal" data-target="#myModal"  href="#">
@@ -108,12 +109,6 @@
 							<input type="text"  class="form-control" name="pass2" id="pass2"  placeholder="请输入你的密码">
 							</div>
 						</div>
-<!-- 						<div class="form-group" id="emailErr">
-							<div class="input-group" >
-							<span class="input-group-addon ">邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱</span>
-							 <input type="email" class="form-control" name="email" id="email" placeholder="请输入你的邮箱">
-							 </div>
-						</div> -->
 						<div class="form-group">
 						<div class="input-group" >
 						<span class="input-group-addon ">性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别</span>
@@ -124,9 +119,6 @@
 						  <label class="btn">
 						    <input type="radio" name="sex" id="sex2" value="女"> &nbsp;&nbsp;&nbsp;&nbsp;女&nbsp;&nbsp;
 						  </label>
-<!-- 						  <label class="btn ">
-						    <input type="radio" name="sex" id="sex3" value="人妖">&nbsp;&nbsp;&nbsp;&nbsp;人妖&nbsp;&nbsp;
-						  </label> -->
 						</div>
 						</div>
 							</div>

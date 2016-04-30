@@ -22,8 +22,8 @@
 	</div>
 	
 	<hr/>
-	<div class="table-responsive col-md-offset-1 col-sm-10 ">
-		<table class="table table-hover success center">
+	<div class="table-responsive">
+		<table class="table table-hover center">
 			<thead>
 				<tr>
 					<th>#</th>
@@ -36,16 +36,16 @@
 			<tbody>
 
 				<c:forEach items="${list}" var="list">
-					<tr class="table-bordered">
-						<td class="table-bordered id">${list.id}</td>
-						<td class="table-bordered name">${list.name}</td>
-						<td class="table-bordered address">${list.address}</td>
-						<td class="table-bordered number">${list.number}</td>
-						<td class="danger table-bordered"><a
-							href="${ctx}/order/delSupplier/${list.id}"> <span
-								class="glyphicon glyphicon-trash"> </span>
-						</a> | <a class="update" data-toggle="modal" data-target="#myModal"
-							href="#"> <span class="glyphicon glyphicon-pencil"></span>
+					<tr>
+						<td>${list.id}</td>
+						<td>${list.name}</td>
+						<td>${list.address}</td>
+						<td>${list.number}</td>
+						<td>
+						<a href="${ctx}/order/delSupplier/${list.id}"> 
+							<span class="glyphicon glyphicon-trash"> </span>
+						</a> | <a class="update" data-toggle="modal" data-target="#myModal" href="#">
+						 <span class="glyphicon glyphicon-pencil"></span>
 						</a></td>
 					</tr>
 				</c:forEach>

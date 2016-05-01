@@ -1,5 +1,6 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags"%>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html lang="zh-cn">
@@ -15,12 +16,13 @@
 </script>
 </head>
 <body>
+<shiro:hasPermission name="order:addSupplier">
 	<div>
 		<!-- Button trigger modal -->
 		<button id="add" class="btn btn-primary btn" data-toggle="modal"
 			data-target="#myModal">添加</button>
 	</div>
-	
+	</shiro:hasPermission>
 	<hr/>
 	<div class="table-responsive">
 		<table class="table table-hover center">
@@ -42,11 +44,12 @@
 						<td>${list.address}</td>
 						<td>${list.number}</td>
 						<td>
+						<shiro:hasPermission name="order:delSupplier">
 						<a href="${ctx}/order/delSupplier/${list.id}"> 
-							<span class="glyphicon glyphicon-trash"> </span>
-						</a> | <a class="update" data-toggle="modal" data-target="#myModal" href="#">
-						 <span class="glyphicon glyphicon-pencil"></span>
-						</a></td>
+							<span class="glyphicon glyphicon-trash">删除 </span>
+						</a> 
+						</shiro:hasPermission>
+						</td>
 					</tr>
 				</c:forEach>
 

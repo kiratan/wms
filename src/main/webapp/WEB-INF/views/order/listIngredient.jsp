@@ -1,5 +1,6 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags"%>
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html lang="zh-cn">
@@ -36,11 +37,13 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
+	<shiro:hasPermission name="order:addIngredient">
 	<div>
 		<!-- Button trigger modal -->
 		<button id="add" class="btn btn-primary btn" data-toggle="modal"
 			data-target="#myModal">添加</button>
 	</div>
+	</shiro:hasPermission>
 	<hr>
 	<div class="table-responsive">
 		<table class="table table-hover center">
@@ -65,11 +68,11 @@ $(document).ready(function(){
 			            <td>${list.price}</td>
 			             <td>${list.unit}</td>
 			            <td>${list.changeTime}</td>
+			            
 						<td>
-						<a href="${ctx}/order/delIngredient/${list.id}"> <span class="glyphicon glyphicon-trash"> </span> </a> | 
-			            <a class="update" data-toggle="modal" data-target="#myModal"  href="#">
-			             	<span class="glyphicon glyphicon-pencil"></span> 
-			            </a>
+						<shiro:hasPermission name="order:delIngredient">
+						<a href="${ctx}/order/delIngredient/${list.id}"> <span class="glyphicon glyphicon-trash">删除 </span> </a> 
+						</shiro:hasPermission>
 						</td>
 					</tr>
 				</c:forEach>

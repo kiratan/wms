@@ -4,6 +4,7 @@ package com.Master5.main.web.login;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -55,13 +56,13 @@ public class Login {
 
 	@Autowired
 	RoleService roleService;
-	
-//	@RequiresGuest
-//	@RequestMapping
-//	public String loginMe() {
-//
-//		return "/login/regist";
-//	}
+
+	// @RequiresGuest
+	// @RequestMapping
+	// public String loginMe() {
+	//
+	// return "/login/regist";
+	// }
 
 	/**
 	 * 登录主页面
@@ -126,13 +127,23 @@ public class Login {
 
 		String pack = "com.Master5.main.web";
 
-		if (null != roleService.findByState(Key.STATE_DEFAULT_ADMIN)) {
-			msgList.add(Key.SYSTEM_INIT_FAILY);
-			redirectAttributes.addFlashAttribute(Key.msg, msgList);
-			return "redirect:/login";
-		}
 		Set<Class<?>> classes = GetClassByPackage.getInstance().getClasses(pack);
 		Set<Permission> permissions = GetValueFromAnnotation.getInstance().getPermissions(classes);
+		List<Permission> haspermissions = permissionService.findAll();
+
+		if (haspermissions.size() != 0) {
+
+			for (Permission per : haspermissions) {
+				for (Iterator<Permission> ite = permissions.iterator();ite.hasNext();) {
+					if (per.getMethod().equals(ite.next().getMethod())) {
+						ite.remove();
+					}
+				}
+			}
+			permissionService.save(permissions);
+			return "redirect:/login";
+		}
+
 		permissionService.save(permissions);
 		Role role = new Role(Key.ROLE_DEFAULT_ADMIN,
 				new HashSet<Permission>(permissionService.findByStateLessThanEqual(Key.STATE_DEFAULT_ADMIN)));

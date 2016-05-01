@@ -85,10 +85,18 @@
 							</span>&nbsp;&nbsp;订单管理 <b class="caret"></b>&nbsp;&nbsp;&nbsp;&nbsp;
 						</a>
 							<ul class="dropdown-menu">
+								<shiro:hasPermission name="order:listOrders">
 								<li><a href="${ctx}/order/listOrders">订单列表</a></li>
+								</shiro:hasPermission>
+								<shiro:hasPermission name="order:listIngredientType">
 								<li><a href="${ctx}/order/listIngredientType">商品类型列表</a></li>
+								</shiro:hasPermission>
+								<shiro:hasPermission name="order:listSupplier">
 								<li><a href="${ctx}/order/listSupplier">供应商列表</a></li>
+								</shiro:hasPermission>
+								<shiro:hasPermission name="order:listIngredient">
 								<li><a href="${ctx}/order/listIngredient">产品列表</a></li>
+								</shiro:hasPermission>
 							</ul></li>
 					</ul>
 

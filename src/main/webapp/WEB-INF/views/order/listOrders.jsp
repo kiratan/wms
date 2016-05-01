@@ -1,5 +1,6 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags"%>
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html lang="zh-cn">
@@ -72,11 +73,13 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
+<shiro:hasPermission name="order:addOrders">
 	<div>
 		<!-- Button trigger modal -->
 		<button id="add" class="btn btn-primary btn" data-toggle="modal"
 			data-target="#myModal">添加</button>
 	</div>
+	</shiro:hasPermission>
 	<hr/>
 	<div class="table-responsive">
 		<table class="table table-hover center table-condensed">
@@ -130,15 +133,21 @@ $(document).ready(function(){
 						<td>${list.remarks}</td>
 						<td>
 							<div class="list-group">
+								<shiro:hasPermission name="order:delOrders">
 								<a href="${ctx}/order/delOrders/${list.id}"  class="list-group-item list-group-item-danger"> 
 									<span class="glyphicon glyphicon-trash"> 删除</span> 
 								</a>
+								</shiro:hasPermission>
+								<shiro:hasPermission name="order:buyOrders">
 				            	<a  href="${ctx}/order/buyOrders/${list.id}"  class="list-group-item list-group-item-primary">
 									<span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"> 购买</span>			           		
 								</a>
+								</shiro:hasPermission>
+								<shiro:hasPermission name="order:receiveOrders">
 								<a  href="${ctx}/order/receiveOrders/${list.id}"  class="list-group-item list-group-item-primary">
 									<span class="glyphicon glyphicon-saved" aria-hidden="true"> 收货</span>		           		
-								</a>							
+								</a>	
+								</shiro:hasPermission>						
 							</div>
 						</td>
 					</tr>

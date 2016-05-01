@@ -40,9 +40,10 @@
 	<div class="container">
 		<%@ include file="/WEB-INF/layouts/header.jsp"%>
 		<div class="row">
+			<div class="col-md-2">
 			<%@ include file="/WEB-INF/layouts/left.jsp"%>
-			<!-- <div id="main" class="col-md-9"> -->
-			<div id="main">
+			</div>
+			 <div id="main" class="col-md-10"> 
 				<sitemesh:body />
 			</div>
 		</div>

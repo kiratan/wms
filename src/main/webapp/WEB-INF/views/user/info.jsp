@@ -18,7 +18,10 @@
 <body>
 
 <div class="row">
-	  <div class="col-md-4"><img class="img-thumbnail" src="${ctx}/resources/img/400${sessionScope.LOGINED.headImg}"></div>
+	  <div class="col-md-4">
+	  <span class="glyphicon glyphicon-leaf info" aria-hidden="true" style="font-size: 400px;color: #006400;"></span>
+	  <%-- <img class="img-thumbnail" src="${ctx}/resources/img/400${sessionScope.LOGINED.headImg}"> --%>
+	  </div>
 	  <div class="col-md-6 col-md-offset-1">
 	  		<div class="row"><h3 class="text-warning">用户名：${sessionScope.LOGINED.name}</h3></div>
 			<div class="row"><h3 class="text-warning">昵称：${sessionScope.LOGINED.nickName}</h3></div>

@@ -24,7 +24,7 @@
 		</div>
 		<div class="form-group">
 			<div>
-				<input type="text" class="form-control" name="pass" id="pass" placeholder="密码">
+				<input type="password" class="form-control" name="pass" id="pass" placeholder="密码">
 			</div>
 		</div>
 		<div class="form-group">

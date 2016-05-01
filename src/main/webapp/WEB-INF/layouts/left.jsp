@@ -20,7 +20,9 @@
 }
 </style>
 <div class="list-group" >
-	<div class="list-group-item list-group-item-info"><span class="glyphicon glyphicon-home"></span> 首    页</div>
+	<div class="list-group-item list-group-item-info">
+		<a href="${ctx}/user/info" style="color:#ffffff;"><span class="glyphicon glyphicon-home"></span> 首    页</a>
+	</div>
 	<div class="list-group-item" data-toggle="collapse" data-target="#systemMenu"><span class="glyphicon glyphicon-cog"></span> 系统管理</div>
 	<div id="systemMenu" class="collapse secondmenu">
 		<ul class="list-unstyled">

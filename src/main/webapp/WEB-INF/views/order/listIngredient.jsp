@@ -71,7 +71,7 @@ $(document).ready(function(){
 			            
 						<td>
 						<shiro:hasPermission name="order:delIngredient">
-						<a href="${ctx}/order/delIngredient/${list.id}"> <span class="glyphicon glyphicon-trash">删除 </span> </a> 
+						<a class="btn btn-danger" href="${ctx}/order/delIngredient/${list.id}"> <span class="glyphicon glyphicon-trash"></span>删除  </a> 
 						</shiro:hasPermission>
 						</td>
 					</tr>

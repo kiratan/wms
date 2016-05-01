@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -17,23 +18,27 @@ import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.annotation.RequiresGuest;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.Master5.main.annotation.CheckPermission;
 import com.Master5.main.annotation.annotationtools.GetValueFromAnnotation;
 import com.Master5.main.utils.GetClassByPackage;
 import com.Master5.main.utils.IPTools;
 import com.Master5.main.utils.constant.Key;
 import com.Master5.main.utils.constant.MsgKey;
+import com.Master5.main.utils.constant.SysKey;
 import com.Master5.main.utils.encrypt.MD5;
 import com.Master5.main.web.user.entry.Permission;
 import com.Master5.main.web.user.entry.Role;
@@ -299,5 +304,16 @@ public class Login {
 		// resList.add(conditonMap);
 		return resList;
 	}
+	
+	@RequiresPermissions(value = "login:exit")
+	@CheckPermission(name = "退出", method = "login:exit", state = SysKey.STATE_DEFAULT_DARK)
+	@RequestMapping(value = "exit", method = RequestMethod.GET)
+	public String exit(HttpSession session, Model model) {
 
+		Subject subject = SecurityUtils.getSubject();
+		if (subject.isAuthenticated()) {
+			subject.logout(); // session 会销毁，在SessionListener监听session销毁，清理权限缓存
+		}
+		return "/login/regist";
+	}
 }

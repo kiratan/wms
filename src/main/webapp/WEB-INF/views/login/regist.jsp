@@ -8,6 +8,30 @@
 <title>登录</title>
 </head>
 <body>
+
+<div class="col-md-offset-4 col-sm-4 wrapper text-center"  >
+
+	<div>
+		<span class="glyphicon glyphicon-leaf info" aria-hidden="true" style="font-size: 140px;color: #21B6AE;"></span>
+		<div style="font-size: 25px;color: #000000;text-align: right;">食材管理系统</div>
+	</div>
+	<%-- <img  class="img-circle" id="headImg" src="${ctx}/resources/img/defaultHead.png"> --%>
+	<form class="form-horizontal" role="form"  action="${ctx}/login/loging" method="post">
+		<div class="form-group">
+			<div>
+				<input type="text" class="form-control" name="name" id="name" placeholder="账号">
+			</div>
+		</div>
+		<div class="form-group">
+			<div>
+				<input type="text" class="form-control" name="pass" id="pass" placeholder="密码">
+			</div>
+		</div>
+		<div class="form-group">
+			<button type="submit" class="btn btn-info" id="login" style="width:100%;">登录</button>
+		</div>
+	</form>
+</div>
 <script type="text/javascript">
 
 var container;
@@ -144,28 +168,5 @@ function render() {
 }
 
 </script>
-<div class="col-md-offset-4 col-sm-4 wrapper text-center"  >
-
-	<div>
-		<span class="glyphicon glyphicon-leaf info" aria-hidden="true" style="font-size: 140px;color: #21B6AE;"></span>
-		<div style="font-size: 25px;color: #000000;text-align: right;">食材管理系统</div>
-	</div>
-	<%-- <img  class="img-circle" id="headImg" src="${ctx}/resources/img/defaultHead.png"> --%>
-	<form class="form-horizontal" role="form"  action="${ctx}/login/loging" method="post">
-		<div class="form-group">
-			<div>
-				<input type="text" class="form-control" name="name" id="name" placeholder="账号">
-			</div>
-		</div>
-		<div class="form-group">
-			<div>
-				<input type="text" class="form-control" name="pass" id="pass" placeholder="密码">
-			</div>
-		</div>
-		<div class="form-group">
-			<button type="submit" class="btn btn-info" id="login" style="width:100%;">登录</button>
-		</div>
-	</form>
-</div>
 </body>
 </html>

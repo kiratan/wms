@@ -87,10 +87,8 @@ $(document).ready(function(){
 	            <th>供应商信息</th>
 	            <th>商品信息</th>
 	            <th>创建时间</th>
-	            <th>购买时间</th>
-	            <th>下单人</th>
-	            <th>收货时间</th>
-	            <th>收货人</th>
+	            <th>购买信息</th>
+	            <th>收货信息</th>
 	            <th>备注</th>
 	            <th>操作</th>
 				</tr>
@@ -103,21 +101,17 @@ $(document).ready(function(){
 			            <td>${list.status}</td>
 			             <td>
 							<ul class="list-group">
-								<li class="list-group-item list-group-item-success">
-								供应商:${list.supplierID.name} 
-								</li>
-								<li class="list-group-item list-group-item-success">
-								地址:${list.supplierID.address} 
-								</li>
-								<li class="list-group-item list-group-item-success">
-								电话:${list.supplierID.number} 
+								<li class="list-group-item">
+								<div>供应商:${list.supplierID.name} </div>
+								<div>地址:${list.supplierID.address}</div> 
+								<div>电话:${list.supplierID.number}</div>  
 								</li>
 							</ul>
 			             </td>
 			            <td>
 				            <ul class="list-group">
 					           	 <c:forEach items="${list.detail}" var="detail">
-						           	 <li class="list-group-item list-group-item-success">
+						           	 <li class="list-group-item list-group-item-info">
 						           	 	<div>${ detail.ingredientId.name}${ detail.amount}${ detail.ingredientId.unit} </div>
 						           	 	<div>单价${detail.ingredientId.price}总价${ detail.ingredientId.price*detail.amount}</div>
 						           	 </li>
@@ -125,16 +119,27 @@ $(document).ready(function(){
 				           	</ul>
 			            </td>
 						<td>${list.createtime}</td>
-						<td>${list.buttime}</td>
-						<td>${list.buyyer.name}</td>
-						<td>${list.intime}</td>
-						<td>${list.manager.name}</td>
+						<td>
+							<div><span class="label label-info">${list.buyyer.name}</span></div>
+							<div><span class="label label-default">${list.buttime}</span></div>
+						</td>
+						<td>
+							<div><span class="label label-info">${list.manager.name}</span></div>
+							<div><span class="label label-default">${list.intime}</span></div>
+						</td>
 						<td>${list.remarks}</td>
 						<td>
-							<a href="${ctx}/order/delOrders/${list.id}"> <span class="glyphicon glyphicon-trash"> </span> </a> | 
-			            	<a class="update" data-toggle="modal" data-target="#myModal"  href="#">
-			             		<span class="glyphicon glyphicon-pencil"></span> 
-			           		</a>
+							<div class="list-group">
+								<a href="${ctx}/order/delOrders/${list.id}"  class="list-group-item list-group-item-danger"> 
+									<span class="glyphicon glyphicon-trash"> 删除</span> 
+								</a>
+				            	<a  href="${ctx}/order/buyOrders/${list.id}"  class="list-group-item list-group-item-primary">
+									<span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"> 购买</span>			           		
+								</a>
+								<a  href="${ctx}/order/receiveOrders/${list.id}"  class="list-group-item list-group-item-primary">
+									<span class="glyphicon glyphicon-saved" aria-hidden="true"> 收货</span>		           		
+								</a>							
+							</div>
 						</td>
 					</tr>
 				</c:forEach>

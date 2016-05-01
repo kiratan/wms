@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.Master5.main.utils.constant.Key;
 import com.Master5.main.utils.constant.MsgKey;
+import com.Master5.main.utils.constant.OrdersStatus;
 import com.Master5.main.web.order.entry.Ingredient;
 import com.Master5.main.web.order.entry.IngredientType;
 import com.Master5.main.web.order.entry.Orders;
@@ -41,36 +42,62 @@ public class OrdersController {
 
 		return "order/listOrders";
 	}
-	
+
 	@RequestMapping(value = "addOrders", method = RequestMethod.POST)
-	public String addOrders(Orders bean,int[] ingredientId, int[] amount, RedirectAttributes redirectAttributes) {
-		
-		
-		List<OrdersIngredient> detail=new ArrayList<>();
-		
-		for(int i=0;i<amount.length;i++){
-			
-			if(amount[i]==0){
+	public String addOrders(Orders bean, int[] ingredientId, int[] amount, RedirectAttributes redirectAttributes) {
+
+		List<OrdersIngredient> detail = new ArrayList<>();
+
+		for (int i = 0; i < amount.length; i++) {
+
+			if (amount[i] == 0) {
 				continue;
 			}
-			
-			OrdersIngredient ordersIngredient=new OrdersIngredient();
+
+			OrdersIngredient ordersIngredient = new OrdersIngredient();
 			ordersIngredient.setAmount(amount[i]);
 			ordersIngredient.setIngredientId(orderService.queryIngredient(ingredientId[i]));
-			
+
 			detail.add(ordersIngredient);
 
 		}
-		
+
 		bean.setDetail(detail);
-		bean.setBuyyer((User)SecurityUtils.getSubject().getSession().getAttribute(Key.LOGINED));
-		bean.setButtime(Calendar.getInstance().getTime());
+		// bean.setBuyyer((User)
+		// SecurityUtils.getSubject().getSession().getAttribute(Key.LOGINED));
+		// bean.setButtime(Calendar.getInstance().getTime());
 		bean.setCreatetime(Calendar.getInstance().getTime());
-		
-		orderService.addOrders(bean);
+
+		orderService.saveOrders(bean);
 		return "redirect:listOrders";
 	}
-	
+
+	@RequestMapping(value = "buyOrders/{id}")
+	public String buy(@PathVariable int id, Model model) {
+		Orders orders = orderService.queryOrders(id);
+		if (orders.getStatus() != OrdersStatus.NORMAL) {
+			return "redirect:../listOrders";
+		}
+		orders.setStatus(OrdersStatus.BUY);
+		orders.setBuyyer((User) SecurityUtils.getSubject().getSession().getAttribute(Key.LOGINED));
+		orders.setButtime(Calendar.getInstance().getTime());
+		orderService.saveOrders(orders);
+		return "redirect:../listOrders";
+	}
+
+	@RequestMapping(value = "receiveOrders/{id}")
+	public String receive(@PathVariable int id, Model model) {
+		Orders orders = orderService.queryOrders(id);
+		if (orders.getStatus() != OrdersStatus.BUY) {
+			return "redirect:../listOrders";
+		}
+		orders.setStatus(OrdersStatus.REVICVE);
+		orders.setManager((User) SecurityUtils.getSubject().getSession().getAttribute(Key.LOGINED));
+		orders.setIntime(Calendar.getInstance().getTime());
+		orderService.saveOrders(orders);
+		return "redirect:../listOrders";
+	}
+
 	@RequestMapping(value = "delOrders/{id}")
 	public String delOrders(@PathVariable int id, Model model) {
 		try {
@@ -133,14 +160,13 @@ public class OrdersController {
 
 		return "order/listSupplier";
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value = "listSupplierJson")
 	public List<Supplier> listSupplierJson(Model model) {
 
 		return orderService.querySupplier();
 	}
-
 
 	@RequestMapping(value = "addSupplier", method = RequestMethod.POST)
 	public String addSupplier(Supplier type, RedirectAttributes redirectAttributes) {
@@ -168,7 +194,7 @@ public class OrdersController {
 
 		return "order/listIngredient";
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value = "listIngredientJson")
 	public List<Ingredient> listIngredientJson(Model model) {

@@ -77,7 +77,7 @@ public class OrderService   {
 		return orderDao.findAll();
 	}
 	
-	public Orders addOrders(Orders bean) {
+	public Orders saveOrders(Orders bean) {
 		return orderDao.saveAndFlush(bean);
 	}
 
@@ -88,6 +88,10 @@ public class OrderService   {
 
 	public Ingredient queryIngredient(int id) {
 		return ingredientDao.findOne(id);
+	}
+
+	public Orders queryOrders(int id) {
+		return orderDao.findOne(id);
 	}
 	
 }

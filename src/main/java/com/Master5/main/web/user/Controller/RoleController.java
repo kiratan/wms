@@ -48,24 +48,28 @@ public class RoleController {
 	public String findAll(Model model) {
 
 		model.addAttribute("list", roleService.findAll());
-		return "role/list";
+		return "user/role";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "me/{id}")
+	public Role findAll(@PathVariable int id) {
+		return roleService.findById(id);
 	}
 
 	@CheckPermission(name = "添加角色", method = "role:add", state = SysKey.STATE_DEFAULT_ADMIN)
 	@RequestMapping(value = "add", method = RequestMethod.POST)
 	@RequiresPermissions(value = "role:add")
-	public String add(@ModelAttribute Role role, String perIds, RedirectAttributes redirectAttributes) {
+	public String add(@ModelAttribute Role role, int[] perIds, RedirectAttributes redirectAttributes) {
 
 		List<String> msgList = new ArrayList<String>();
 
-		if (StringUtils.isNotEmpty(role.getName()) && StringUtils.isNotEmpty(perIds)) {
+		if (StringUtils.isNotEmpty(role.getName()) && perIds.length>0) {
 
 			Set<Permission> perSet = new HashSet<Permission>();
 
-			String[] perIdArray = perIds.split(",");
-
-			for (String perId : perIdArray) {
-				perSet.add(permissionService.findById(Integer.parseInt(perId)));
+			for (int perId : perIds) {
+				perSet.add(permissionService.findById( perId));
 			}
 			role.setPermissions(perSet);
 			if (null == roleService.save(role)) {
@@ -83,11 +87,9 @@ public class RoleController {
 	@RequiresPermissions(value = "role:modify")
 	@CheckPermission(name = "添加角色", method = "role:modify", state = SysKey.STATE_DEFAULT_ADMIN)
 	@RequestMapping(value = "modify", method = RequestMethod.POST)
-	public String modify(int id, String name, String perIds, RedirectAttributes redirectAttributes) {
+	public String modify( Role role, int[] perIds, RedirectAttributes redirectAttributes) {
 
 		List<String> msgList = new ArrayList<String>();
-
-		Role role = roleService.findById(id);
 
 		if (null == role) {
 			msgList.add(MsgTips.NO_THIS_DATA);
@@ -99,19 +101,15 @@ public class RoleController {
 			return "redirect:list";
 		}
 
-		if (StringUtils.isNotEmpty(perIds)) {
+		if (perIds.length>0) {
 			Set<Permission> perSet = new HashSet<Permission>();
 
-			String[] perIdArray = perIds.split(",");
-
-			for (String perId : perIdArray) {
-				perSet.add(permissionService.findById(Integer.parseInt(perId)));
+			for (int perId : perIds) {
+				perSet.add(permissionService.findById(perId));
 			}
 			role.setPermissions(perSet);
 		}
 
-		if (StringUtils.isNotEmpty(name))
-			role.setName(name);
 		if (null == roleService.save(role)) {
 			msgList.add(MsgTips.ADD_FAILY);
 		} else {

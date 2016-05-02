@@ -41,7 +41,7 @@
 			            <td>${list.name}</td>
 						<td>
 						<shiro:hasPermission name="order:delIngredientType">
-						<a href="${ctx}/order/delIngredientType/${list.id}"> <span class="glyphicon glyphicon-trash">删除 </span> </a> 
+						<a  class="btn btn-danger"  href="${ctx}/order/delIngredientType/${list.id}"> <span class="glyphicon glyphicon-trash">删除 </span> </a> 
 						</shiro:hasPermission> 
 						</td>
 					</tr>

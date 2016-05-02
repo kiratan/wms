@@ -20,7 +20,7 @@
 				<img class="img-thumbnail" src="${ctx}/resources/img/logo.png">
 			<span class="glyphicon glyphicon-fire" aria-hidden="true" style="font-size: 50px;"></span>
 				</a> --%>
-				 <a class="navbar-brand active" href="${ctx}/menu/list">食材管理系统</a>
+				 <a class="navbar-brand active" href="${ctx}/user/info">食材管理系统</a>
 			</div>
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
@@ -49,7 +49,7 @@
 								<li class="small"><a href="#">IP:${sessionScope.LOGINED.ip}</a></li>
 								<li class="divider"></li>
 								<li class="small">
-									<a href="${ctx}/menu/exit"><span class="glyphicon glyphicon-off"></span> 退出 </a>
+									<a href="${ctx}/login/exit"><span class="glyphicon glyphicon-off"></span> 退出 </a>
 								</li>
 							</shiro:authenticated>
 						</ul></li>
@@ -67,9 +67,9 @@
 								<shiro:hasPermission name="user:list">
 									<li><a href="${ctx}/user/list">用户管理</a></li>
 								</shiro:hasPermission>
-								<%--    <shiro:hasPermission name="role:list"> --%>
+								<shiro:hasPermission name="role:list">
 								<li><a href="${ctx}/role/list">角色管理</a></li>
-								<%-- 	     	 </shiro:hasPermission> --%>
+								</shiro:hasPermission>
 								<shiro:hasPermission name="permission:list">
 									<li><a href="${ctx}/permission/list">权限管理</a></li>
 								</shiro:hasPermission>
@@ -78,7 +78,6 @@
 								</shiro:hasPermission>
 							</ul></li>
 					</ul>
-					
 					<ul class="nav navbar-nav navbar-right">
 						<li class="dropdown"><a href="#" class="dropdown-toggle"
 							data-toggle="dropdown"> <span class="glyphicon glyphicon-cog">

@@ -45,7 +45,7 @@
 						<td>${list.number}</td>
 						<td>
 						<shiro:hasPermission name="order:delSupplier">
-						<a href="${ctx}/order/delSupplier/${list.id}"> 
+						<a   class="btn btn-danger"  href="${ctx}/order/delSupplier/${list.id}"> 
 							<span class="glyphicon glyphicon-trash">删除 </span>
 						</a> 
 						</shiro:hasPermission>

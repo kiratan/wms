@@ -73,25 +73,31 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
-<shiro:hasPermission name="order:addOrders">
+
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">订单管理页面</div>
+  <div class="panel-body">
+ 
+	<shiro:hasPermission name="order:addOrders">
 	<div>
 		<!-- Button trigger modal -->
 		<button id="add" class="btn btn-primary btn" data-toggle="modal"
 			data-target="#myModal">添加</button>
 	</div>
-	</shiro:hasPermission>
-	<hr/>
+	</shiro:hasPermission> 
+	</div>
 	<div class="table-responsive">
-		<table class="table table-hover center table-condensed">
+		<table class="table table-hover">
 			<thead>
 				<tr>
 				<th>#</th>
-				<th>订单状态</th>
-	            <th>供应商信息</th>
+				<th>状态</th>
+	            <th>供应商</th>
 	            <th>商品信息</th>
-	            <th>创建时间</th>
+<!-- 	            <th>创建时间</th>
 	            <th>购买信息</th>
-	            <th>收货信息</th>
+	            <th>收货信息</th> -->
 	            <th>备注</th>
 	            <th>操作</th>
 				</tr>
@@ -101,13 +107,23 @@ $(document).ready(function(){
 				<c:forEach items="${list}" var="list">
 					<tr>
 					  	<td>${list.id}</td>
-			            <td>${list.status}</td>
+			            <td>
+						<div><span class="label label-info">创建订单</span></div>
+						<div>时间：${list.createtime}</div>
+			            <c:if test="${list.status gt 0}">
+							<div><span class="label label-info">${list.buyyer.name}采购完成</span></div>
+							<div>时间：${list.buttime}</div>
+			            </c:if>
+			            <c:if test="${list.status gt 1}">
+							<div><span class="label label-info">${list.manager.name}收货完成</span></div>
+							<div>时间：${list.intime}</div>
+			            </c:if>
 			             <td>
 							<ul class="list-group">
 								<li class="list-group-item">
-								<div>供应商:${list.supplierID.name} </div>
-								<div>地址:${list.supplierID.address}</div> 
-								<div>电话:${list.supplierID.number}</div>  
+								<div><span class="glyphicon glyphicon-user"></span>  ${list.supplierID.name} </div>
+								<div><span class="glyphicon glyphicon-home"></span>  ${list.supplierID.address}</div> 
+								<div><span class="glyphicon glyphicon-phone"></span> ${list.supplierID.number}</div>  
 								</li>
 							</ul>
 			             </td>
@@ -121,7 +137,7 @@ $(document).ready(function(){
 					           	 </c:forEach>
 				           	</ul>
 			            </td>
-						<td>${list.createtime}</td>
+		<%-- 				<td>${list.createtime}</td>
 						<td>
 							<div><span class="label label-info">${list.buyyer.name}</span></div>
 							<div><span class="label label-default">${list.buttime}</span></div>
@@ -129,7 +145,7 @@ $(document).ready(function(){
 						<td>
 							<div><span class="label label-info">${list.manager.name}</span></div>
 							<div><span class="label label-default">${list.intime}</span></div>
-						</td>
+						</td> --%>
 						<td>${list.remarks}</td>
 						<td>
 							<div class="list-group">
@@ -156,7 +172,7 @@ $(document).ready(function(){
 			</tbody>
 		</table>
 	</div>
-
+</div>
 	<!-- Modal -->
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"  aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">

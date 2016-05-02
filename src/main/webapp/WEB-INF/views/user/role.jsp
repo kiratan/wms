@@ -50,7 +50,7 @@
 						<td>
 						<a href="./del/${role.id}"> <span class="glyphicon glyphicon-trash"> </span> </a> | 
 						<a href="./lock/${role.id}"><span class="glyphicon glyphicon-lock"> </span></a> | 
-			             <a class="update" data-toggle="modal" data-target="#myModal"  href="#">
+			             <a  id="${role.id}" class="update" data-toggle="modal" data-target="#myModal"  href="#">
 			             <span class="glyphicon glyphicon-pencil"></span> </a>
 						</td>
 					</tr>
@@ -85,23 +85,17 @@
 						<br />
 						<div class="input-group">
 							<div class="panel-group" id="accordion" >
-									<div id="perPanel" class="panel panel-info"  hidden>
-										<div class="perInfo" data-toggle="collapse" data-parent="#accordion" href="">
+									<div id="perPanel" class="panel panel-info"  hidden="true">
+										<div class="perInfo" data-toggle="collapse" data-parent="#accordion">
 											<div class="panel-heading">
-												<h3 class="panel-title ">
-													<!-- 标题 -->
-													权限类型:
-													<!-- 标题 -->
-												</h3>
+												<h3 class="panel-title"> 权限类型: </h3>
 											</div>
 										</div>
-										<div id="" class="panel-collapse collapse">
+										<div id="" class="panel-collapse in">
 											<div class="panel-body">
 												<!-- 内容 -->
 												<div class="btn-group " data-toggle="buttons">
-												<%-- 	<c:forEach items="${map.value}" var="per"> --%>
 														<label class="btn perlable" id=""> </label>
-													<%-- </c:forEach> --%>
 												</div>
 												<!-- 内容 -->
 											</div>

@@ -39,8 +39,8 @@ public class Role implements Serializable {
 
 	private int state;// 默认角色不锁定
 
-	@ManyToMany(mappedBy = "roles")
-	private Set<User> users = new HashSet<User>();// 角色对于用户是多对多
+//	@ManyToMany(mappedBy = "roles")
+//	private Set<User> users = new HashSet<User>();// 角色对于用户是多对多
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "role_permission", joinColumns = { @JoinColumn(name = "role_id") }, inverseJoinColumns = {
@@ -67,15 +67,15 @@ public class Role implements Serializable {
 		this.name = name;
 	}
 
-	public Set<User> getUsers() {
-
-		return users;
-	}
-
-	public void setUsers(Set<User> users) {
-
-		this.users = users;
-	}
+//	public Set<User> getUsers() {
+//
+//		return users;
+//	}
+//
+//	public void setUsers(Set<User> users) {
+//
+//		this.users = users;
+//	}
 
 	public Set<Permission> getPermissions() {
 

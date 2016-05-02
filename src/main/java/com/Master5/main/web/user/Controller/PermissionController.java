@@ -47,7 +47,7 @@ public class PermissionController {
 
 		model.addAttribute("list", list);
 
-		return "permission/list";
+		return "user/permission";
 	}
 
 	@RequiresPermissions(value = "permission:add")
@@ -67,7 +67,7 @@ public class PermissionController {
 			msgList.add(MsgTips.ENTRY_EMPTY);
 		}
 		redirectAttributes.addFlashAttribute(Key.msg, msgList);
-		return "redirect:list";
+		return "redirect:permission";
 	}
 
 	@RequiresPermissions(value = "permission:modify")

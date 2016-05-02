@@ -1,6 +1,7 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html lang="zh-cn">
@@ -15,7 +16,7 @@
 
 $(document).ready(function(){
 	
-	$("#add").click(function(){
+	$("#addOrders").click(function(){
 		
 		$.ajax({
 			url:"../order/listSupplierJson",
@@ -82,7 +83,7 @@ $(document).ready(function(){
 	<shiro:hasPermission name="order:addOrders">
 	<div>
 		<!-- Button trigger modal -->
-		<button id="add" class="btn btn-primary btn" data-toggle="modal"
+		<button id="addOrders" class="btn btn-primary btn" data-toggle="modal"
 			data-target="#myModal">添加</button>
 	</div>
 	</shiro:hasPermission> 
@@ -132,7 +133,7 @@ $(document).ready(function(){
 					           	 <c:forEach items="${list.detail}" var="detail">
 						           	 <li class="list-group-item list-group-item-info">
 						           	 	<div>${ detail.ingredientId.name}${ detail.amount}${ detail.ingredientId.unit} </div>
-						           	 	<div>单价${detail.ingredientId.price}总价${ detail.ingredientId.price*detail.amount}</div>
+						           	 	<div>单价${detail.ingredientId.price}总价<fmt:formatNumber value="${ detail.ingredientId.price*detail.amount}" pattern="0.00"/></div>
 						           	 </li>
 					           	 </c:forEach>
 				           	</ul>

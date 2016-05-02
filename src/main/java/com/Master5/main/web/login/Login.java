@@ -107,7 +107,7 @@ public class Login {
 				loginUser.setIp(IPTools.getClientIp(request));
 				session.setAttribute(Key.LOGINED, loginUser);
 				redirectAttributes.addFlashAttribute(MsgKey.msg, msgList);
-				logger.info("登陆成功：" + loginUser.getNickName());
+				logger.info("登录成功：" + loginUser.getNickName());
 				return "redirect:/user/info";
 			}
 		} catch (UnknownAccountException ex) {

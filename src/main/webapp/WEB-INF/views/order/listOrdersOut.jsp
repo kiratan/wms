@@ -16,26 +16,14 @@
 
 $(document).ready(function(){
 	
-	$("#addOrders").click(function(){
+	$("#addOrdersOut").click(function(){
 		
 		$.ajax({
-			url:"../order/listSupplierJson",
+			url:"../order/totalJson",
 			type : "post",
 			dataType : 'json',
 			success:function(data,status){
-				var select=$("#supplierID").empty();
-				$.each(data,function(){
-					select.append('<option value="'+this.id+'">'+this.name+'</option>');
-				});
-			}
-		});
-		
-		$.ajax({
-			url:"../order/listIngredientJson",
-			type : "post",
-			dataType : 'json',
-			success:function(data,status){
-				var select=$("#ingredient").empty();
+				var select=$("#ingredientOut").empty();
 				select.append(
 						'<thead>'+
 						'<tr>'+
@@ -43,20 +31,22 @@ $(document).ready(function(){
 						   '<th>名称</th>'+
 						   '<th>价格</th>'+
 						   '<th>数量</th>'+
+						   '<th>出库</th>'+
 						'</tr>'+
 						'</thead>'
 				);
 				$.each(data,function(i,value){
 					select.append(
 							'<tr>'+
-							   '<td>'+this.ingredientType.name+'</td>'+
-							   '<td>'+this.name+'</td>'+
-							   '<td>'+this.price+"元/"+this.unit+'</td>'+
+							   '<td>'+this.ingredientId.ingredientType.name+'</td>'+
+							   '<td>'+this.ingredientId.name+'</td>'+
+							   '<td>'+this.ingredientId.price+"元/"+this.ingredientId.unit+'</td>'+
+							   '<td>'+this.amount +'</td>'+
 							   '<td class="col-sm-4">'+
 							  		'<div class="input-group">'+
-						   			'<input type="hidden" name="ingredientId" value="'+this.id+'">'+
-							   			'<input min="0" value="0" type="number" name="amount" class="ingredientInfo form-control">'+
-							  			 '<div class="input-group-addon">'+this.unit+'</div>'+
+						   			'<input type="hidden" name="ingredientId" value="'+this.ingredientId.id+'">'+
+							   			'<input min="0" max="'+this.amount+'" value="0" type="number" name="amount" class="ingredientInfo form-control">'+
+							  			 '<div class="input-group-addon">'+this.ingredientId.unit+'</div>'+
 							  		'</div>'+
 							  	'</td>'+
 							'</tr>'
@@ -68,8 +58,6 @@ $(document).ready(function(){
 		});
 		
 	});
-	
-	
 	
 });
 	
@@ -85,8 +73,8 @@ $(document).ready(function(){
 	<shiro:hasPermission name="order:addOrders">
 	<div>
 		<!-- Button trigger modal -->
-		<button id="addOrders" class="btn btn-primary btn" data-toggle="modal"
-			data-target="#myModal">添加</button>
+		<button id="addOrdersOut" class="btn btn-primary btn" data-toggle="modal"
+			data-target="#addOut">出库</button>
 	</div>
 	</shiro:hasPermission> 
 	</div>
@@ -96,7 +84,6 @@ $(document).ready(function(){
 				<tr>
 				<th>#</th>
 				<th>状态</th>
-	            <th>供应商</th>
 	            <th>商品信息</th>
 <!-- 	            <th>创建时间</th>
 	            <th>购买信息</th>
@@ -114,28 +101,19 @@ $(document).ready(function(){
 						<div><span class="label label-info">创建订单</span></div>
 						<div>时间：${list.createtime}</div>
 			            <c:if test="${list.status gt 0}">
-							<div><span class="label label-info">${list.buyyer.name}采购完成</span></div>
+							<div><span class="label label-info">${list.buyyer.name}下单完成</span></div>
 							<div>时间：${list.buttime}</div>
 			            </c:if>
 			            <c:if test="${list.status gt 1}">
-							<div><span class="label label-info">${list.manager.name}收货完成</span></div>
+							<div><span class="label label-info">${list.manager.name}发货完成</span></div>
 							<div>时间：${list.intime}</div>
 			            </c:if>
-			             <td>
-							<ul class="list-group">
-								<li class="list-group-item">
-								<div><span class="glyphicon glyphicon-user"></span>  ${list.supplierID.name} </div>
-								<div><span class="glyphicon glyphicon-home"></span>  ${list.supplierID.address}</div> 
-								<div><span class="glyphicon glyphicon-phone"></span> ${list.supplierID.number}</div>  
-								</li>
-							</ul>
-			             </td>
 			            <td>
 				            <ul class="list-group">
 					           	 <c:forEach items="${list.detail}" var="detail">
 						           	 <li class="list-group-item list-group-item-info">
-						           	 	<div>${ detail.ingredientId.name}${ detail.amount}${ detail.ingredientId.unit} </div>
-						           	 	<div>单价${detail.ingredientId.price}总价<fmt:formatNumber value="${ detail.ingredientId.price*detail.amount}" pattern="0.00"/></div>
+						           	 	<div>${ detail.ingredientId.name}${ -detail.amount}${ detail.ingredientId.unit} </div>
+						           	 	<div>单价${detail.ingredientId.price}总价<fmt:formatNumber value="${ detail.ingredientId.price*(-detail.amount)}" pattern="0.00"/></div>
 						           	 </li>
 					           	 </c:forEach>
 				           	</ul>
@@ -159,12 +137,12 @@ $(document).ready(function(){
 								</shiro:hasPermission>
 								<shiro:hasPermission name="order:buyOrders">
 				            	<a  href="${ctx}/order/buyOrders/${list.id}"  class="list-group-item list-group-item-primary">
-									<span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"> 购买</span>			           		
+									<span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"> 下单</span>			           		
 								</a>
 								</shiro:hasPermission>
 								<shiro:hasPermission name="order:receiveOrders">
 								<a  href="${ctx}/order/receiveOrders/${list.id}"  class="list-group-item list-group-item-primary">
-									<span class="glyphicon glyphicon-saved" aria-hidden="true"> 收货</span>		           		
+									<span class="glyphicon glyphicon-saved" aria-hidden="true"> 发货</span>		           		
 								</a>	
 								</shiro:hasPermission>						
 							</div>
@@ -176,8 +154,10 @@ $(document).ready(function(){
 		</table>
 	</div>
 </div>
+
+
 	<!-- Modal -->
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"  aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal fade" id="addOut" tabindex="-1" role="dialog"  aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -186,18 +166,13 @@ $(document).ready(function(){
 					</button>
 					<h4 class="modal-title" id="myModalLabel">添加</h4>
 				</div>
-				   <form id="addForm" role="form" action="${ctx}/order/addOrders" method="post">
+				   <form id="addForm" role="form" action="${ctx}/order/addOrdersOut" method="post">
 					<div class="modal-body" >
 						<!-- 弹框内容  -->
 						<div class="form-group">
-						   <label for="supplierID">供应商</label>
-							<select class="form-control" name="supplierID.id"  id="supplierID" >
-							</select>
-						</div>
-						<div class="form-group">
 						   <label for="ingredient">商品</label>
 						   <div class="table-responsive">
-						   		<table class="table table-hover info table-condensed" id="ingredient" >
+						   		<table class="table table-hover info table-condensed" id="ingredientOut" >
 						   		</table>
 						   </div>
 						</div>

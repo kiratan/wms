@@ -84,6 +84,10 @@ public class OrderService   {
 		return orderDao.findAll();
 	}
 	
+	public List<Orders> queryOrdersByType(int type){
+		return orderDao.findByType( type);
+	}
+	
 	public Orders saveOrders(Orders bean) {
 		return orderDao.saveAndFlush(bean);
 	}

@@ -15,7 +15,7 @@ public interface OrdersIngredientDao extends JpaRepository<OrdersIngredient, Int
 	@Query(value="select sum(orders_ingredient.amount) as amount,orders_ingredient.ingredient_id as ingredient_id,"
 			+ "orders_ingredient.id as id,orders_ingredient.orders_id as orders_id from "
 			+ "orders_ingredient left join orders on orders_ingredient.orders_id=orders.id"
-			+ " group by orders_ingredient.ingredient_id,orders.type order by orders_ingredient.ingredient_id desc;",
+			+ " group by orders_ingredient.ingredient_id order by orders_ingredient.ingredient_id desc having(sum(orders_ingredient.amount)>0);",
 			nativeQuery=true
 			)
 	public List<OrdersIngredient> queryTotal();

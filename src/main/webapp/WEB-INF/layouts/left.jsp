@@ -44,8 +44,9 @@
 	<div id="orderMenu" class="collapse secondmenu">
 		<ul class="list-unstyled right">
 			<shiro:hasPermission name="order:listOrders">
-				<li><a href="${ctx}/order/listOrders"><span class="glyphicon glyphicon-list"></span> 订单列表</a></li>
+				<li><a href="${ctx}/order/listOrders"><span class="glyphicon glyphicon-list"></span> 采购订单列表</a></li>
 			</shiro:hasPermission>
+			<li><a href="${ctx}/order/listOrdersOut"><span class="glyphicon glyphicon-list"></span> 出库订单列表</a></li>
 			<li><a href="${ctx}/order/total"><span class="glyphicon glyphicon-list"></span> 统计</a></li>
 <%-- 			<shiro:hasPermission name="order:addOrders">
 				<li><a href="#" class="addOrders" data-toggle="modal"

@@ -16,6 +16,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+
 import com.Master5.main.web.user.entry.User;
 
 /**
@@ -26,6 +28,7 @@ import com.Master5.main.web.user.entry.User;
  */
 @Entity
 @Table(name = "orders")
+@JsonIgnoreProperties(value={"detail"})
 public class Orders {
 
 	@Id

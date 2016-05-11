@@ -39,13 +39,24 @@ public class OrdersController {
 	@RequiresPermissions(value = "order:listOrders")
 	@CheckPermission(name = "订单列表", method = "order:listOrders")
 	@RequestMapping(value = { "", "listOrders" })
-	public String listOrders(Model model) {
+	public String listOrdersIn(Model model) {
 
-		List<Orders> list = orderService.queryOrders();
+		List<Orders> list = orderService.queryOrdersByType(0);
 
 		model.addAttribute("list", list);
 
 		return "order/listOrders";
+	}
+	
+	@CheckPermission(name = "订单列表", method = "order:listOrders")
+	@RequestMapping(value = { "listOrdersOut" })
+	public String listOrdersOut(Model model) {
+
+		List<Orders> list = orderService.queryOrdersByType(1);
+
+		model.addAttribute("list", list);
+
+		return "order/listOrdersOut";
 	}
 
 	@RequiresPermissions(value = "order:addOrders")
@@ -75,8 +86,39 @@ public class OrdersController {
 		// bean.setButtime(Calendar.getInstance().getTime());
 		bean.setCreatetime(Calendar.getInstance().getTime());
 
+		bean.setType(0);
 		orderService.saveOrders(bean);
 		return "redirect:listOrders";
+	}
+	
+	@RequestMapping(value = "addOrdersOut", method = RequestMethod.POST)
+	public String addOrdersOut(Orders bean, int[] ingredientId, int[] amount, RedirectAttributes redirectAttributes) {
+
+		List<OrdersIngredient> detail = new ArrayList<>();
+
+		for (int i = 0; i < amount.length; i++) {
+
+			if (amount[i] == 0) {
+				continue;
+			}
+
+			OrdersIngredient ordersIngredient = new OrdersIngredient();
+			ordersIngredient.setAmount(-amount[i]);
+			ordersIngredient.setIngredientId(orderService.queryIngredient(ingredientId[i]));
+
+			detail.add(ordersIngredient);
+
+		}
+
+		bean.setDetail(detail);
+		// bean.setBuyyer((User)
+		// SecurityUtils.getSubject().getSession().getAttribute(Key.LOGINED));
+		// bean.setButtime(Calendar.getInstance().getTime());
+		bean.setCreatetime(Calendar.getInstance().getTime());
+
+		bean.setType(1);
+		orderService.saveOrders(bean);
+		return "redirect:listOrdersOut";
 	}
 
 	@RequiresPermissions(value = "order:buyOrders")
@@ -85,13 +127,13 @@ public class OrdersController {
 	public String buy(@PathVariable int id, Model model) {
 		Orders orders = orderService.queryOrders(id);
 		if (orders.getStatus() != OrdersStatus.NORMAL) {
-			return "redirect:../listOrders";
+			return "redirect:../listOrders"+(orders.getType()==0?"":"Out");
 		}
 		orders.setStatus(OrdersStatus.BUY);
 		orders.setBuyyer((User) SecurityUtils.getSubject().getSession().getAttribute(Key.LOGINED));
 		orders.setButtime(Calendar.getInstance().getTime());
 		orderService.saveOrders(orders);
-		return "redirect:../listOrders";
+		return "redirect:../listOrders"+(orders.getType()==0?"":"Out");
 	}
 
 	@RequiresPermissions(value = "order:receiveOrders")
@@ -100,27 +142,29 @@ public class OrdersController {
 	public String receive(@PathVariable int id, Model model) {
 		Orders orders = orderService.queryOrders(id);
 		if (orders.getStatus() != OrdersStatus.BUY) {
-			return "redirect:../listOrders";
+			return "redirect:../listOrders"+(orders.getType()==0?"":"Out");
 		}
 		orders.setStatus(OrdersStatus.REVICVE);
 		orders.setManager((User) SecurityUtils.getSubject().getSession().getAttribute(Key.LOGINED));
 		orders.setIntime(Calendar.getInstance().getTime());
 		orderService.saveOrders(orders);
-		return "redirect:../listOrders";
+		return "redirect:../listOrders"+(orders.getType()==0?"":"Out");
 	}
 
 	@RequiresPermissions(value = "order:delOrders")
 	@CheckPermission(name = "订单删除", method = "order:delOrders")
 	@RequestMapping(value = "delOrders/{id}")
 	public String delOrders(@PathVariable int id, Model model) {
+		Orders orders = null;
 		try {
+			  orders=orderService.queryOrders(id);
 			orderService.deleteOrders(id);
 		} catch (JpaSystemException e) {
 			List<String> list = new ArrayList<>();
 			list.add("删除失败，有相关联的数据未删除。");
 			model.addAttribute(MsgKey.msg, list);
 		}
-		return "redirect:../listOrders";
+		return "redirect:../listOrders"+(orders.getType()==0?"":"Out");
 	}
 
 	@ResponseBody
@@ -255,6 +299,14 @@ public class OrdersController {
 		model.addAttribute("list", orderService.queryTotal());
 
 		return "order/total";
+	}
+	
+
+	@RequestMapping(value = "totalJson")
+	@ResponseBody
+	public List<OrdersIngredient> totalJson( ) {
+		
+		return orderService.queryTotal();
 	}
 	
 }

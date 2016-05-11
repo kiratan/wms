@@ -247,5 +247,14 @@ public class OrdersController {
 		}
 		return "redirect:../listIngredient";
 	}
+	
 
+	@RequestMapping(value = "total")
+	public String total(  Model model) {
+		
+		model.addAttribute("list", orderService.queryTotal());
+
+		return "order/total";
+	}
+	
 }

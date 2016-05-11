@@ -46,6 +46,7 @@
 			<shiro:hasPermission name="order:listOrders">
 				<li><a href="${ctx}/order/listOrders"><span class="glyphicon glyphicon-list"></span> 订单列表</a></li>
 			</shiro:hasPermission>
+			<li><a href="${ctx}/order/total"><span class="glyphicon glyphicon-list"></span> 统计</a></li>
 <%-- 			<shiro:hasPermission name="order:addOrders">
 				<li><a href="#" class="addOrders" data-toggle="modal"
 					data-target="#myModal"><span class="glyphicon glyphicon-plus"></span> 添加订单</a></li>

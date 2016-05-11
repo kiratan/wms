@@ -1,21 +1,25 @@
 package com.Master5.main.web.order.service;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Iterator;
 import java.util.List;
 
 import org.hibernate.exception.ConstraintViolationException;
+import org.junit.runner.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.Master5.main.web.order.dao.IngredientDao;
 import com.Master5.main.web.order.dao.IngredientTypeDao;
 import com.Master5.main.web.order.dao.OrderDao;
+import com.Master5.main.web.order.dao.OrdersIngredientDao;
 import com.Master5.main.web.order.dao.SupplierDao;
 import com.Master5.main.web.order.entry.Ingredient;
 import com.Master5.main.web.order.entry.IngredientType;
 import com.Master5.main.web.order.entry.Orders;
+import com.Master5.main.web.order.entry.OrdersIngredient;
 import com.Master5.main.web.order.entry.Supplier;
-import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
 
 @Service
 public class OrderService   {
@@ -31,6 +35,9 @@ public class OrderService   {
 
 	@Autowired
 	IngredientTypeDao ingredientTypeDao;
+	
+	@Autowired
+	OrdersIngredientDao ordersIngredientDao;
 
 	public List<IngredientType> queryIngredientType() {
 		return ingredientTypeDao.findAll();
@@ -92,6 +99,18 @@ public class OrderService   {
 
 	public Orders queryOrders(int id) {
 		return orderDao.findOne(id);
+	}
+	
+	public List<OrdersIngredient> queryTotal(){
+		
+		return ordersIngredientDao.queryTotal();
+		
+	}
+	
+	public static void main(String[] args) {
+		System.out.println("select sum(orders_ingredient.amount) as amount,orders_ingredient.ingredient_id as ingredient_id from "
+			+ "orders_ingredient left join orders on orders_ingredient.orders_id=orders.id"
+			+ " group by orders_ingredient.ingredient_id,orders.type order by orders_ingredient.ingredient_id desc;");
 	}
 	
 }

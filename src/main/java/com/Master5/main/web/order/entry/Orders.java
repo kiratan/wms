@@ -51,6 +51,8 @@ public class Orders {
 	private User manager;
 
 	private Date intime;
+	
+	private int type;
 
 //	@ManyToMany
 //	@JoinTable(name = "orders_ingredient", joinColumns = { @JoinColumn(name = "orders_id") }, inverseJoinColumns = {
@@ -154,6 +156,14 @@ public class Orders {
 		return "Orders [id=" + id + ", supplierID=" + supplierID + ", status=" + status + ", remarks=" + remarks
 				+ ", createtime=" + createtime + ", buyyer=" + buyyer + ", buttime=" + buttime + ", manager=" + manager
 				+ ", intime=" + intime   + ", detail=" + detail + "]";
+	}
+
+	public int getType() {
+		return type;
+	}
+
+	public void setType(int type) {
+		this.type = type;
 	}
 
 }

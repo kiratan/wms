@@ -112,9 +112,10 @@ public class OrderService   {
 	}
 	
 	public static void main(String[] args) {
-		System.out.println("select sum(orders_ingredient.amount) as amount,orders_ingredient.ingredient_id as ingredient_id from "
-			+ "orders_ingredient left join orders on orders_ingredient.orders_id=orders.id"
-			+ " group by orders_ingredient.ingredient_id,orders.type order by orders_ingredient.ingredient_id desc;");
+		System.out.println("select sum(orders_ingredient.amount) as amount,orders_ingredient.ingredient_id as ingredient_id,"
+				+ "orders_ingredient.id as id,orders_ingredient.orders_id as orders_id from "
+				+ "orders_ingredient left join orders on orders_ingredient.orders_id=orders.id"
+				+ " group by orders_ingredient.ingredient_id  having sum(orders_ingredient.amount)>0 order by orders_ingredient.ingredient_id desc;");
 	}
 	
 }

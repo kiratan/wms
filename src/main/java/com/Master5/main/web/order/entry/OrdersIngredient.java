@@ -27,6 +27,12 @@ public class OrdersIngredient {
 	@JoinColumn(name = "ingredient_id")
 	private Ingredient ingredientId;
 
+	@Override
+	public String toString() {
+		return "OrdersIngredient [id=" + id + ", ordersId=" + ordersId + ", ingredientId=" + ingredientId + ", amount="
+				+ amount + "]";
+	}
+
 	private int amount;
 
 	public int getId() {
